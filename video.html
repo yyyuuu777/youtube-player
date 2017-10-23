@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>player</title>
+    <link rel="stylesheet"  href="./styles/video.css">
+</head>
+<body>
+
+<section class="video">
+<video src="http://vjs.zencdn.net/v/oceans.mp4" autoplay="autoplay" controls="controls" id="video"> </video>
+    <section class="control">
+        <div class="progress" id="progress-wrap">
+            <div class="buffered-progress" id="buffered-progress">
+                <div class="inner" id="video-progress-inner"></div>
+            </div>
+        </div>
+    <div class="btns">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li class="video-time">
+                <span>0:20</span>
+                <span>/</span>
+                <span>1:47:12</span>
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    </section>
+</section>
+
+
+<script>
+
+    // in method better not deal global|out data
+    // todo:// provide dash interface, implement same method to use this video player
+    // todo:// ads insert
+    let num = 0;
+    class Util {
+        getDom (id) {
+           return document.getElementById(id)
+        }
+        log (str) {
+            console.log(`${num++}：videoPlayer--->`, str)
+        }
+    }
+    let util = new Util();
+
+    class Controller {
+
+        constructor (video) {
+            this.video = video
+            this.video_info = {
+                duration: '',
+                currentTime: '',
+                volume: '',
+                speed: '',
+                buffered: ''
+            }
+            this.listen_type = {
+                canplay: 'canplay',
+                play: 'play',
+                playing: 'playing',
+                timeupdate: 'timeupdate'
+            }
+        }
+
+        // entry method
+        init () {
+           this.listen()
+           this.proxy_video_info= this.proxy_render_to_view()
+        }
+
+        sync_video_info (video_info = this.video_info) {
+            video_info.duration = this.video.duration
+            video_info.currentTime = this.video.currentTime
+            video_info.volume = this.video.volume
+            video_info.buffered = this.video.buffered.end(0)
+        }
+        listen () {
+            this.video.addEventListener(this.listen_type.canplay, () => util.log('video-canplay-now'))
+            this.video.addEventListener(this.listen_type.play, () => {
+                this.sync_and_log({
+                    event_name: this.listen_type.play
+                })
+                this.video_info.duration = this.video.duration
+                util.log(`ready! video duration is ---->${this.video.duration}`)
+            })
+            this.video.addEventListener(this.listen_type.playing, () => {
+                this.sync_and_log({
+                    event_name: this.listen_type.timeupdate
+                })
+            })
+            this.video.addEventListener(this.listen_type.timeupdate, () => {
+                util.log('video-play-time-change-now')
+                this.sync_and_log({
+                    event_name: this.listen_type.timeupdate,
+                    proxy: this.proxy_video_info
+                })
+            })
+        }
+
+        sync_and_log ({event_name, proxy}) {
+            util.log(event_name)
+            this.sync_video_info(proxy)
+            this.print_video_info()
+        }
+
+        // print cat video info
+        print_video_info () {
+            Object.keys(this.video_info).forEach( item => {
+                util.log(this.video_info[item])
+            })
+        }
+
+        // The video attribute is delegated to the following method, bind data - view
+        proxy_render_to_view () {
+           let ui_progress_wrap = util.getDom('progress-wrap')
+           let ui_progress = util.getDom('video-progress-inner')
+           let ui_buffered = util.getDom('buffered-progress')
+           let ui_progress_wrap_width = ui_progress_wrap.clientWidth
+           util.log(`get progress wrap width is ----> ${ui_progress_wrap_width}`)
+           return new Proxy(this.video_info, {
+                set:  (target, key, value, receiver) => {
+                    util.log(`ui ----> setting ---> ${key}`)
+                    if (Object.is('currentTime', key)) {
+                        // 这里可以使用函数式编程, 进度宽度 = 进度宽度/总进度  * 当前事件/总时间
+                        ui_progress.style.width = `${this.cal_current_progress_buffered_width(value, this.video_info.duration, ui_progress_wrap_width)()}px`
+                        ui_buffered.style.width = `${this.cal_current_progress_buffered_width(this.video_info.buffered, this.video_info.duration, ui_progress_wrap_width)()}px`
+                    }
+                    return Reflect.set(target, key, value, receiver);
+                }
+            });
+        }
+
+        cal_current_progress_buffered_width (current_time, duration, wrap_with) {
+            return function () {
+                return current_time/duration*wrap_with
+            }
+        }
+
+
+    }
+
+
+    let video = util.getDom('video')
+    let video_obj = new Controller(video)
+    video_obj.init()
+
+
+</script>
+
+
+
+</body>
+</html>
