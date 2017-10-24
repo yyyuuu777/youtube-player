@@ -3,23 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>player</title>
+    <link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.css" rel="stylesheet">
     <link rel="stylesheet"  href="./styles/video.css">
+    <style>
+    </style>
 </head>
 <body>
+
+<!--svg test -->
+
+
 
 <section class="video">
 <video src="http://vjs.zencdn.net/v/oceans.mp4" autoplay="autoplay" controls="controls" id="video"> </video>
     <section class="control">
         <div class="progress" id="progress-wrap">
             <div class="buffered-progress" id="buffered-progress">
-                <div class="inner" id="video-progress-inner"></div>
+                <div class="inner" id="video-progress-inner">
+                    <div class="point" id="progress-point"></div>
+                </div>
             </div>
         </div>
     <div class="btns">
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
+            <!--player button-->
+            <li>
+                <div class="player-btn">
+                    <button class="button js-button">
+                        <svg width="100%" height="100%" viewBox="0 0 36 36" id="svgicon" >
+                            <defs>
+                                <path id="pause-icon" data-state="playing" d="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26" />
+                                <path id="play-icon"  data-state="paused"  d="M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28" />
+                            </defs>
+                            <use xlink:href="#play-icon" />
+                        </svg>
+                    </button>
+                </div>
+            </li>
+            <li>
+
+                <button class="next-btn">
+                  <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%"><use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ytp-id-12"></use><path class="ytp-svg-fill" d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z" id="ytp-id-12"></path></svg>
+                </button>
+
+            </li>
+            <li>
+                <div class="volume-btn">
+                <button class="volume">
+                    <svg width="100%" height="100%" id="svg-volume" viewBox="0 0 64 64" >
+                        <defs>
+                            <path id="icon-volume"  data-state="mute" d="M 0 22 L 12 22 L 32 5 L 32 59 L 12 42 L 0 42"/>
+                            <path id="icon-volume-med"  data-state="med" d="M 0 22 L 12 22 L 32 5 L 32 59 L 12 42 L 0 42 M 36,22 A 10,10 0 0 1 36,42 L 36,38 A 5,5 0 0 0 36,26"/>
+                        </defs>
+                        <use xlink:href="#icon-volume-med" />
+                    </svg>
+                </button>
+                </div>
+            </li>
             <li></li>
             <li class="video-time">
                 <span>0:20</span>
@@ -122,6 +162,7 @@
         proxy_render_to_view () {
            let ui_progress_wrap = util.getDom('progress-wrap')
            let ui_progress = util.getDom('video-progress-inner')
+           let ui_progress_point = util.getDom('progress-point')
            let ui_buffered = util.getDom('buffered-progress')
            let ui_progress_wrap_width = ui_progress_wrap.clientWidth
            util.log(`get progress wrap width is ----> ${ui_progress_wrap_width}`)
@@ -130,7 +171,7 @@
                     util.log(`ui ----> setting ---> ${key}`)
                     if (Object.is('currentTime', key)) {
                         // 这里可以使用函数式编程, 进度宽度 = 进度宽度/总进度  * 当前事件/总时间
-                        ui_progress.style.width = `${this.cal_current_progress_buffered_width(value, this.video_info.duration, ui_progress_wrap_width)()}px`
+                        ui_progress_point.style.left = ui_progress.style.width = `${this.cal_current_progress_buffered_width(value, this.video_info.duration, ui_progress_wrap_width)()}px`
                         ui_buffered.style.width = `${this.cal_current_progress_buffered_width(this.video_info.buffered, this.video_info.duration, ui_progress_wrap_width)()}px`
                     }
                     return Reflect.set(target, key, value, receiver);
@@ -144,7 +185,6 @@
             }
         }
 
-
     }
 
 
@@ -155,6 +195,100 @@
 
 </script>
 
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js "></script>
+
+<script>
+    // todo:// frame this init animate
+    var playButton = {
+        el: document.querySelector(".js-button"),
+        iconEls: {
+            playing: document.querySelector("#pause-icon"),
+            paused:  document.querySelector("#play-icon")
+        },
+        nextState: {
+            playing: "paused",
+            paused:  "playing"
+        },
+        init: function () {
+            this.setInitialState();
+            this.replaceUseEl();
+            this.el.addEventListener("click", this.toggle.bind(this));
+        },
+        setInitialState: function () {
+            var initialIconRef = this.el.querySelector("use").getAttribute("xlink:href");
+            this.state = this.el.querySelector(initialIconRef).getAttribute("data-state");
+
+        },
+        replaceUseEl: function () {
+            var path = Snap("#svgicon").paper.path();
+            $(".js-button").find("use").remove();
+            Snap("#svgicon").append(path);
+            path.attr("class", "js-icon").attr("d", this.stateIconPath());
+        },
+        toggle: function () {
+            var path = Snap.select('.js-icon');
+            this.goToNextState()
+            path.animate({
+                d:this.stateIconPath()
+            },100,mina.linear);
+        },
+        goToNextState: function () {
+            this.state = this.nextState[this.state];
+        },
+        stateIconPath: function () {
+            return this.iconEls[this.state].getAttribute("d");
+        }
+    };
+     playButton.init();
+</script>
+
+<script>
+
+
+    var playButton1 = {
+        el: document.querySelector(".volume"),
+        iconEls: {
+            mute: document.querySelector("#icon-volume"),
+            med:  document.querySelector("#icon-volume-med")
+        },
+        nextState: {
+            mute: "med",
+            med:  "mute"
+        },
+        init: function () {
+            this.setInitialState();
+            this.replaceUseEl();
+            this.el.addEventListener("click", this.toggle.bind(this));
+        },
+        setInitialState: function () {
+            var initialIconRef = this.el.querySelector("use").getAttribute("xlink:href");
+            this.state = this.el.querySelector(initialIconRef).getAttribute("data-state");
+
+        },
+        replaceUseEl: function () {
+            var path = Snap("#svg-volume").paper.path();
+            $(".volume").find("use").remove();
+            Snap("#svg-volume").append(path);
+            path.attr("class", "js-icon2").attr("d", this.stateIconPath());
+        },
+        toggle: function () {
+            var path = Snap.select('.js-icon2');
+            this.goToNextState()
+            path.animate({
+                d:this.stateIconPath()
+            },500,mina.linear);
+        },
+        goToNextState: function () {
+            this.state = this.nextState[this.state];
+        },
+        stateIconPath: function () {
+            return this.iconEls[this.state].getAttribute("d");
+        }
+    };
+     playButton1.init();
+
+</script>
 
 
 </body>
