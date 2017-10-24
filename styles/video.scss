@@ -36,6 +36,12 @@ $progress_active_height: 8px;
   top: 10px;
   z-index: 100;
   width: 100%;
+  &:hover .progress{
+    height: $progress_active_height;
+  }
+  &:hover .point{
+    opacity: 1 !important;
+  }
   background-color: rgba(0,0,0,0.8);
   .progress {
     width: 100%;
@@ -47,12 +53,6 @@ $progress_active_height: 8px;
       transition: all .9s;
       width: 200px;
       height: 100%;
-      &:hover {
-        height: $progress_active_height;
-      }
-      &:hover .point{
-        opacity: 1 !important;
-      }
       .inner{
         position: relative;
         background: $palyer_color;

@@ -24,6 +24,10 @@ ul > li {
   z-index: 100;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8); }
+  .control:hover .progress {
+    height: 8px; }
+  .control:hover .point {
+    opacity: 1 !important; }
   .control .progress {
     width: 100%;
     height: 3px;
@@ -34,10 +38,6 @@ ul > li {
       transition: all .9s;
       width: 200px;
       height: 100%; }
-      .control .progress .buffered-progress:hover {
-        height: 8px; }
-      .control .progress .buffered-progress:hover .point {
-        opacity: 1 !important; }
       .control .progress .buffered-progress .inner {
         position: relative;
         background: red;
