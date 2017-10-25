@@ -11,16 +11,19 @@ button {
 button:active, button:focus{
   border: none;
 }
-ul>li{
+li{
   list-style: none;
 }
 
 $buffered_color: gray;
 $palyer_color: red;
 
-$progress_point_size: 20px;
+$progress_point_size: 13px;
 $progress_normal_height: 3px;
-$progress_active_height: 8px;
+$progress_active_height: 5px;
+
+$ads_color: yellow;
+
 @mixin flex{
   display: flex;
 }
@@ -30,33 +33,42 @@ $progress_active_height: 8px;
   min-height: 200px;
   min-width: 200px;
   position: relative;
+  video{
+    width: 100%;
+  }
 }
 .control {
   position: absolute;
   top: 10px;
-  z-index: 100;
+  z-index: 1000;
   width: 100%;
+  &:hover {
+    cursor: pointer;
+  }
   &:hover .progress{
-    height: $progress_active_height;
+    //height: $progress_active_height;
+    transform: scaleY(1.5);
   }
   &:hover .point{
     opacity: 1 !important;
+    transform: scaleY(0.67);
   }
   background-color: rgba(0,0,0,0.8);
   .progress {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    transition: all .4s;
     height: $progress_normal_height;
     background-color: rgba(255, 255, 255, 0.2);
     .buffered-progress {
       background: $buffered_color;
-      border-radius: 5px;
-      transition: all .9s;
       width: 200px;
       height: 100%;
       .inner{
         position: relative;
         background: $palyer_color;
-        border-radius: 5px;
         width: 200px;
         height: 100%;
         .point {
@@ -72,6 +84,16 @@ $progress_active_height: 8px;
           height: $progress_point_size;
           border-radius: $progress_point_size;
         }
+        .yellow-point {
+          height: 100%;
+          width: 7px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          background: $ads_color;
+          z-index: 101;
+        }
       }
 
     }
@@ -79,6 +101,10 @@ $progress_active_height: 8px;
   .btns {
     ul{
       @include flex;
+      .control-left {
+        flex: 1;
+        display: flex;
+      }
       li {
         span {
           font-size: 12px;
@@ -99,9 +125,9 @@ $progress_active_height: 8px;
         .volume-btn {
           width: 20px;
         }
-        .next-btn {
+        .setting-btn, .movie-btn, .fullscreen, .next-btn {
           height: 100%;
-          width: 36px;
+          width: 32px;
           svg {
             fill: #fff;
           }
@@ -110,4 +136,48 @@ $progress_active_height: 8px;
     }
   }
 }
+.video-full {
+  position: fixed; right: 0; bottom: 0;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto; z-index: -100;
+  //background: url(polina.jpg) no-repeat;
+  background-size: cover;
+}
 
+//full screen
+* { box-sizing: border-box; }
+.video-background {
+  background: #000;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -99;
+  .video-foreground,
+  .video{
+    video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+  }
+
+}
+
+
+//refer https://codepen.io/dudleystorey/pen/PZyMrd
+// todo:// usefule ?
+//@media (min-aspect-ratio: 16/9) {
+//  .video-foreground { height: 300%; top: -100%; }
+//}
+//@media (max-aspect-ratio: 16/9) {
+//  .video-foreground { width: 300%; left: -100%; }
+//}
+//@media all and (max-width: 600px) {
+//  .vid-info { width: 50%; padding: .5rem; }
+//  .vid-info h1 { margin-bottom: .2rem; }
+//}
+//@media all and (max-width: 500px) {
+//  .vid-info .acronym { display: none; }
+//}
