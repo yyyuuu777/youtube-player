@@ -147,6 +147,30 @@ li {
           cursor: pointer; }
       .control .btns ul li .speed-menu > p:nth-of-type(1) {
         border-bottom: 1px solid #fff; }
+    .control .btns ul .volume-control {
+      height: 100%;
+      width: 50px;
+      padding-top: 18px;
+      margin-right: 10px; }
+      .control .btns ul .volume-control .volume-out {
+        height: 3px;
+        background-color: rgba(255, 255, 255, 0.2); }
+        .control .btns ul .volume-control .volume-out .volume-inner {
+          background: #fff;
+          width: 10px;
+          height: 100%;
+          position: relative; }
+          .control .btns ul .volume-control .volume-out .volume-inner .volume-point {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+            width: 9px;
+            height: 9px;
+            border-radius: 9px;
+            background: #fff;
+            z-index: 3; }
 
 .video-full {
   position: fixed;

@@ -197,6 +197,35 @@ li{
           }
         }
       }
+      .volume-control {
+        height: 100%;
+        width: 50px;
+        padding-top: 18px;
+        margin-right: 10px;
+        .volume-out {
+          height: 3px;
+          background-color: rgba(255,255,255,.2);
+          .volume-inner {
+            background: #fff;
+            width: 10px;
+            height: 100%;
+            position: relative;
+            .volume-point {
+              position: absolute;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              margin: auto;
+              width: 9px;
+              height: 9px;
+              border-radius: 9px;
+              background: #fff;
+              z-index: 3;
+
+            }
+          }
+        }
+      }
     }
   }
 }

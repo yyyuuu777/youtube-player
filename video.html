@@ -17,7 +17,7 @@
     <!--video-background-->
     <div class="" id="fullscreen-wrap">
     <div class="video-foreground">
-    <video src="http://vjs.zencdn.net/v/oceans.mp4"  controls="controls" id="video"></video>
+    <video src="http://vjs.zencdn.net/v/oceans.mp4"   id="video"></video>
     <section class="control">
         <div class="progress" id="progress-wrap">
             <div class="buffered-progress" id="buffered-progress">
@@ -70,7 +70,13 @@
                             </button>
                         </div>
                     </li>
-                    <li></li>
+                    <li class="volume-control">
+                       <div class="volume-out">
+                           <div class="volume-inner">
+                               <div class="volume-point"></div>
+                           </div>
+                       </div>
+                    </li>
                     <li class="video-time">
                         <span id="video-current-time">0:20</span>
                         <span>/</span>
