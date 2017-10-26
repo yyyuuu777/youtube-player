@@ -16,13 +16,14 @@ li {
 .video {
   min-height: 200px;
   min-width: 200px;
+  width: 70%;
   position: relative; }
   .video video {
     width: 100%; }
 
 .control {
   position: absolute;
-  top: 10px;
+  bottom: 1px;
   z-index: 1000;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8); }
@@ -37,17 +38,18 @@ li {
     position: absolute;
     top: 0;
     left: 0;
-    width: 1000px;
-    height: 3px;
-    background-color: rgba(255, 255, 255, 0.2); }
+    width: 99%;
+    right: 0;
+    margin: auto;
+    height: 3px; }
     .control .progress .buffered-progress {
       background: gray;
-      width: 200px;
+      width: 0;
       height: 100%; }
       .control .progress .buffered-progress .inner {
         position: relative;
         background: red;
-        width: 200px;
+        width: 0;
         height: 100%; }
         .control .progress .buffered-progress .inner .point {
           opacity: 0;
@@ -71,10 +73,13 @@ li {
           background: yellow;
           z-index: 101; }
   .control .btns ul {
+    padding: 0 14px;
     display: flex; }
     .control .btns ul .control-left {
       flex: 1;
       display: flex; }
+    .control .btns ul .setting-wrap {
+      position: relative; }
     .control .btns ul li span {
       font-size: 12px;
       color: #fff;
@@ -87,13 +92,61 @@ li {
         height: 100%; }
       .control .btns ul li .player-btn svg, .control .btns ul li .volume-btn svg {
         fill: #fff; }
-    .control .btns ul li .volume-btn {
-      width: 20px; }
     .control .btns ul li .setting-btn, .control .btns ul li .movie-btn, .control .btns ul li .fullscreen, .control .btns ul li .next-btn {
       height: 100%;
-      width: 32px; }
+      width: 36px;
+      transition: transform .5s; }
       .control .btns ul li .setting-btn svg, .control .btns ul li .movie-btn svg, .control .btns ul li .fullscreen svg, .control .btns ul li .next-btn svg {
         fill: #fff; }
+    .control .btns ul li .fullscreen:hover {
+      transform: scale(1.1); }
+    .control .btns ul li .setting-menu {
+      display: none;
+      position: absolute;
+      bottom: 50px;
+      right: 50%;
+      width: 189px;
+      height: 112px;
+      transition: all .5s;
+      border-radius: 3px;
+      background-color: rgba(28, 28, 28, 0.9); }
+      .control .btns ul li .setting-menu > div {
+        display: flex;
+        padding: 10px;
+        height: 33px;
+        font-size: 14px; }
+        .control .btns ul li .setting-menu > div:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          cursor: pointer; }
+        .control .btns ul li .setting-menu > div p {
+          color: #fff;
+          flex: 1; }
+        .control .btns ul li .setting-menu > div > p:nth-of-type(1) {
+          text-align: left; }
+        .control .btns ul li .setting-menu > div > p:nth-of-type(2) {
+          text-align: right; }
+          .control .btns ul li .setting-menu > div > p:nth-of-type(2) i {
+            font-weight: 600; }
+    .control .btns ul li .speed-menu {
+      display: none;
+      position: absolute;
+      right: 30%;
+      width: 99px;
+      height: 290px;
+      border-radius: 3px;
+      background-color: rgba(28, 28, 28, 0.9);
+      bottom: 50px; }
+      .control .btns ul li .speed-menu p {
+        height: 33px;
+        text-align: center;
+        color: #fff;
+        line-height: 33px;
+        font-size: 12px; }
+        .control .btns ul li .speed-menu p:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          cursor: pointer; }
+      .control .btns ul li .speed-menu > p:nth-of-type(1) {
+        border-bottom: 1px solid #fff; }
 
 .video-full {
   position: fixed;

@@ -13,11 +13,11 @@
 <!--svg test -->
 
 
-<div class="video">
+<div class="video" id="video-wrap">
     <!--video-background-->
     <div class="" id="fullscreen-wrap">
     <div class="video-foreground">
-    <video src="http://vjs.zencdn.net/v/oceans.mp4" autoplay="autoplay" controls="controls" id="video"></video>
+    <video src="http://vjs.zencdn.net/v/oceans.mp4"  controls="controls" id="video"></video>
     <section class="control">
         <div class="progress" id="progress-wrap">
             <div class="buffered-progress" id="buffered-progress">
@@ -60,12 +60,10 @@
                     <li>
                         <div class="volume-btn">
                             <button class="volume">
-                                <svg width="100%" height="100%" id="svg-volume" viewBox="0 0 64 64">
+                                <svg width="100%" height="100%" id="svg-volume" viewBox="0 0 36 36">
                                     <defs>
-                                        <path id="icon-volume" data-state="mute"
-                                              d="M 0 22 L 12 22 L 32 5 L 32 59 L 12 42 L 0 42"/>
-                                        <path id="icon-volume-med" data-state="med"
-                                              d="M 0 22 L 12 22 L 32 5 L 32 59 L 12 42 L 0 42 M 36,22 A 10,10 0 0 1 36,42 L 36,38 A 5,5 0 0 0 36,26"/>
+                                        <path class="ytp-svg-fill" id="icon-volume" data-state="mute" d="m 21.48,17.98 c 0,-1.77 -1.02,-3.29 -2.5,-4.03 v 2.21 l 2.45,2.45 c .03,-0.2 .05,-0.41 .05,-0.63 z m 2.5,0 c 0,.94 -0.2,1.82 -0.54,2.64 l 1.51,1.51 c .66,-1.24 1.03,-2.65 1.03,-4.15 0,-4.28 -2.99,-7.86 -7,-8.76 v 2.05 c 2.89,.86 5,3.54 5,6.71 z M 9.25,8.98 l -1.27,1.26 4.72,4.73 H 7.98 v 6 H 11.98 l 5,5 v -6.73 l 4.25,4.25 c -0.67,.52 -1.42,.93 -2.25,1.18 v 2.06 c 1.38,-0.31 2.63,-0.95 3.69,-1.81 l 2.04,2.05 1.27,-1.27 -9,-9 -7.72,-7.72 z m 7.72,.99 -2.09,2.08 2.09,2.09 V 9.98 z" id="ytp-id-122"></path>
+                                        <path class="ytp-svg-fill ytp-svg-volume-animation-speaker" id="icon-volume-med" data-state="med" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 Z" fill="#fff" ></path>
                                     </defs>
                                     <use xlink:href="#icon-volume-med"/>
                                 </svg>
@@ -79,8 +77,8 @@
                         <span id="video-duration"></span>
                     </li>
                 </div>
-                <li>
-                    <button class="setting-btn">
+                <li class="setting-wrap">
+                    <button class="setting-btn" id="setting-btn" data-state="close">
                         <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
                             <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
                                  xlink:href="#ytp-id-18"></use>
@@ -88,9 +86,30 @@
                                   fill="#fff" id="ytp-id-18"></path>
                         </svg>
                     </button>
+                    <div class="menu">
+                        <section class="setting-menu" id="setting-menu">
+                            <div id="speed-parent-menu">
+                                <p> speed </p>
+                                <p> normal <i> > </i> </p>
+                            </div>
+                        </section>
+
+                        <section class="speed-menu" id="speed-menu">
+                            <p id="back-setting-parent"> < 返回</p>
+                            <p class="speed-value"> 0.25 </p>
+                            <p class="speed-value"> 0.5  </p>
+                            <p class="speed-value"> 0.75 </p>
+                            <p class="speed-value"> normal </p>
+                            <p class="speed-value"> 1.25 </p>
+                            <p class="speed-value"> 1.5 </p>
+                            <p class="speed-value"> 1.75 </p>
+                        </section>
+
+                    </div>
+
                 </li>
                 <li>
-                    <button class="movie-btn">
+                    <button class="movie-btn" id="theater-btn">
                         <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
                             <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
                                  xlink:href="#ytp-id-28"></use>
@@ -142,22 +161,30 @@
 
 <script>
 
+    //rebuild
+    let log_config = {
+        num: 0,
+        debug: false
+    }
+
     // in method better not deal global|out data
     // todo:// provide dash interface, implement same method to use this video player
     // todo:// ads insert
-    let num = 0
-    let log_tag = true
+//    import log_config  from './config/yPlayer_config'
     class Util {
         getDom(id) {
+            if(id.includes('.')) {
+                return document.getElementsByClassName(id.substring(1))
+            }
             return document.getElementById(id)
         }
 
         log(str) {
-            console.log(`${num++}：videoPlayer--->`, str)
+            log_config.debug && console.log(`${log_config.num++}：videoPlayer--->`, str)
         }
 
         i (str) {
-            console.log(`${num++} special：-------------------------------->`, str)
+            log_config.debug && console.log(`${log_config.num++} special: ${'-'.repeat(10)}> str`)
         }
 
         generateDom () {
@@ -202,6 +229,23 @@
                 play: 'play',
                 playing: 'playing',
                 timeupdate: 'timeupdate'
+            }
+            this.doms = {
+                ui_progress_wrap: util.getDom('progress-wrap'),
+                ui_progress_point: util.getDom('progress-point'),
+                ui_buffered: util.getDom('buffered-progress'),
+                ui_duration: util.getDom('video-duration'),
+                ui_progress: util.getDom('video-progress-inner'),
+                ui_fullScreen: util.getDom('full-screen'),
+                ui_video_current_time: util.getDom('video-current-time'),
+                ui_video_setting: util.getDom('setting-btn'),
+                ui_video_setting_menu: util.getDom('setting-menu'),
+                ui_video_speed_menu: util.getDom('speed-menu'),
+                ui_video_speed_parent_menu: util.getDom('speed-parent-menu'),
+                ui_speed_array: [...util.getDom('.speed-value')],
+                ui_back_setting: util.getDom('back-setting-parent'),
+                ui_theater_btn: util.getDom('theater-btn'),
+                ui_video_wrap: util.getDom('video-wrap')
             }
         }
 
@@ -259,26 +303,22 @@
 
         // The video attribute is delegated to the following method, bind data - view
         proxy_render_to_view() {
-            let ui_progress_wrap = util.getDom('progress-wrap')
-            let ui_progress = util.getDom('video-progress-inner')
-            let ui_progress_point = util.getDom('progress-point')
-            let ui_buffered = util.getDom('buffered-progress')
-            let ui_video_current_time = util.getDom('video-current-time')
-            let ui_duration = util.getDom('video-duration')
-            let ui_progress_wrap_width = ui_progress_wrap.clientWidth
-            util.log(`get progress wrap width is ----> ${ui_progress_wrap_width}`)
+
+
+            let progress_wrap_width = this.doms.ui_progress_wrap.clientWidth
+            util.log(`get progress wrap width is ----> ${progress_wrap_width}`)
             return new Proxy(this.video_info, {
                 set: (target, key, value, receiver) => {
                     util.log(`ui ----> setting ---> ${key}`)
                     if (Object.is('currentTime', key)) {
                         // 这里可以使用函数式编程, 进度宽度 = 进度宽度/总进度  * 当前事件/总时间
-                        ui_progress.style.width = ui_progress_point.style.left = `${this.cal_current_progress_buffered_width(value, this.video_info.duration, ui_progress_wrap_width)()}px`
-                        ui_buffered.style.width = `${this.cal_current_progress_buffered_width(this.video_info.buffered, this.video_info.duration, ui_progress_wrap_width)()}px`
-                        ui_video_current_time.innerHTML = this.format_duration(value.toFixed(0))
+                        this.doms.ui_progress.style.width = this.doms.ui_progress_point.style.left = `${this.cal_current_progress_buffered_width(value, this.video_info.duration, progress_wrap_width)()}px`
+                        this.doms.ui_buffered.style.width = `${this.cal_current_progress_buffered_width(this.video_info.buffered, this.video_info.duration, progress_wrap_width)()}px`
+                        this.doms.ui_video_current_time.innerHTML = this.format_duration(value.toFixed(0))
                     } if (Object.is('duration', key)) {
-                         ui_duration.innerHTML = this.format_duration(value.toFixed(0))
+                         this.doms.ui_duration.innerHTML = this.format_duration(value.toFixed(0))
                          // set yellow point
-                        let pos = ui_progress_wrap_width/4
+                        let pos = progress_wrap_width/4
                         this.add_yellow_point(
                             pos,
                             2*pos,
@@ -306,6 +346,7 @@
             if (seconds < 10) {seconds = "0"+seconds;}
             return hours+':'+minutes+':'+seconds;
         }
+
         generate_yellow_point (pos) {
           let dom = util.generateDom();
           return dom.div({
@@ -313,26 +354,22 @@
               style: `left:${pos}px`
           })
         }
+
         add_yellow_point (...rest) {
-            let ui_progress = util.getDom('video-progress-inner')
             rest.forEach( item => {
                 util.i(item)
                 let yellow_dom = this.generate_yellow_point(item)
-                util.addChildren(yellow_dom, ui_progress)
+                util.addChildren(yellow_dom, this.doms.ui_progress)
             })
         }
 
         init_event () {
             // todo:// add event init Dom like android
-            let ui_fullScreen = util.getDom('full-screen');
-            let ui_progress_point = util.getDom('progress-point')
-            let ui_progress_wrap = util.getDom('progress-wrap')
-            let ui_progress = util.getDom('video-progress-inner')
-            this.bind_event(ui_fullScreen, 'click', () => {
+            this.bind_event(this.doms.ui_fullScreen, 'click', () => {
                 this.full_screen()
             })
             let drag = false
-            this.bind_event(ui_progress_wrap, 'mousedown', (e) => {
+            this.bind_event(this.doms.ui_progress_wrap, 'mousedown', (e) => {
                 drag = true;
                 this.video.pause()
                 console.log('mouse donw 事件执行')
@@ -355,18 +392,101 @@
                 }
             })
 
+            this.bind_event(this.doms.ui_video_speed_parent_menu, 'click', (e) => {
+                this.doms.ui_video_speed_menu.style.display = 'block'
+                this.hide_setting_menu()
+            })
+
+            this.bind_event(this.doms.ui_video_setting,'click', (e) => {
+                let dom = e.currentTarget
+                var state = dom.dataset.state;
+                if (Object.is('open', state)) {
+                    this.hide_setting_menu()
+                } else {
+                    this.show_setting_menu()
+                    if (this.equal('block', this.get_display_state(this.doms.ui_video_speed_menu))){
+                        this.hide_speed_menu()
+                    }
+                }
+            })
+
+            this.doms.ui_speed_array.forEach( item => {
+                this.bind_event(item, 'click', e => {
+                    let speed = e.currentTarget.innerHTML
+                    speed = this.equal('normal', speed) ? 1 : speed
+                    if (Number.isInteger(parseInt(speed))) {
+                         this.video.playbackRate = speed
+                         this.hide_speed_menu()
+                    } else {
+                        throw new Error ('speed is need number')
+                    }
+
+                })
+            })
+
+            this.bind_event(this.doms.ui_back_setting, 'click', e => {
+                this.hide_speed_menu()
+                this.show_setting_menu()
+            })
+
+            this.bind_event(this.doms.ui_theater_btn, 'click', e => {
+                this.toggle_theater()
+            })
+
+        }
+
+        toggle_theater () {
+            if (this.doms.ui_video_wrap.style.width === '100%'){
+                this.doms.ui_video_wrap.style.width = '70%'
+            } else {
+                this.doms.ui_video_wrap.style.width = '100%'
+            }
+
+        }
+
+        equal (el1, el2) {
+            if (typeof el1 === 'string') {
+                el1 = this.format_str(el1)
+            }
+            if (typeof el2 === 'string') {
+                el2 = this.format_str(el2)
+            }
+           return Object.is(el1, el2)
+        }
+
+        format_str (str) {
+           return str.replace(/^\s+|\s+$/g,"");
+        }
+
+        get_display_state (ele) {
+           return ele.style.display
+        }
+
+        hide_setting_menu () {
+            this.doms.ui_video_setting_menu.style.display = 'none'
+            this.doms.ui_video_setting.dataset.state = 'close'
+            this.doms.ui_video_setting.style.transform = 'rotate(30deg)'
+        }
+
+        show_setting_menu () {
+            this.doms.ui_video_setting_menu.style.display = 'block'
+            this.doms.ui_video_setting.dataset.state = 'open'
+            this.doms.ui_video_setting.style.transform = 'rotate(0deg)'
+        }
+
+        hide_speed_menu () {
+            this.doms.ui_video_speed_menu.style.display = 'none'
+        }
+
+        show_speed_menu () {
+            this.doms.ui_video_speed_menu.style.display = 'block'
         }
 
         update_progress_after_drag (x) {
-            let ui_fullScreen = util.getDom('full-screen');
-            let ui_progress_point = util.getDom('progress-point')
-            let ui_progress_wrap = util.getDom('progress-wrap')
-            let ui_progress = util.getDom('video-progress-inner')
-            let ui_video_current_time = util.getDom('video-current-time')
             // - process.offset.left
             let position = x - $('#progress-point').offset().left
-            console.log('------------','mouse position is ------->'+x, 'point offset screen left is '+this.get_offset_left(ui_progress_point), 'pageX change distance is -->'+position)
-//            var percentage = 100 * position / ui_progress_wrap.style.width;
+            console.log('------------','mouse position is ------->'+x, 'point offset screen left is '+this.get_offset_left(this.doms.ui_progress_point), 'pageX change distance is -->'+position)
+//            var percentage = 100 * position / this.doms.ui_progress_wrap.style.width;
 //            if(percentage > 100) {
 //                percentage = 100;
 //            }
@@ -374,12 +494,12 @@
 //                percentage = 0;
 //            }
             // set progress postion
-                ui_progress_point.style.left = ui_progress.style.width = position + parseInt(ui_progress.style.width) + 'px'
-            // todo:// 此时 wrap width 为 null? !!!! witdth 与 client width 耗时并不是没有理由的 你对 js 原生 dom 这些属性 不熟悉！
-                console.log('after drag postion is ------->', ui_progress.clientWidth, ui_progress_point.style.left)
-                console.log('currentTime', parseInt(ui_progress.style.width), ui_progress_wrap.clientWidth, this.video_info.duration)
-                this.video.currentTime = parseInt(ui_progress.style.width) / parseInt(ui_progress_wrap.clientWidth) * this.video_info.duration
-            // todo:// ui_video_current_time =
+                this.doms.ui_progress_point.style.left = this.doms.ui_progress.style.width = position + parseInt(this.doms.ui_progress.style.width) + 'px'
+            // todo:// 此时 wrap width 为 null? !!!! witdth 与 client width 耗时并不是没有理由的 你对 config 原生 dom 这些属性 不熟悉！
+                console.log('after drag postion is ------->', this.doms.ui_progress.clientWidth, this.doms.ui_progress_point.style.left)
+                console.log('currentTime', parseInt(this.doms.ui_progress.style.width), this.doms.ui_progress_wrap.clientWidth, this.video_info.duration)
+                this.video.currentTime = parseInt(this.doms.ui_progress.style.width) / parseInt(this.doms.ui_progress_wrap.clientWidth) * this.video_info.duration
+            // todo:// this.doms.ui_video_current_time =
 
         }
 
@@ -405,7 +525,6 @@
            })
         }
     }
-
 
     let video = util.getDom('video')
     //todo:// set play speed

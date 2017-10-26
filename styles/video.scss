@@ -1,3 +1,4 @@
+@import "config";
 // reset
 html, body, *{
   padding: 0;
@@ -15,15 +16,6 @@ li{
   list-style: none;
 }
 
-$buffered_color: gray;
-$palyer_color: red;
-
-$progress_point_size: 13px;
-$progress_normal_height: 3px;
-$progress_active_height: 5px;
-
-$ads_color: yellow;
-
 @mixin flex{
   display: flex;
 }
@@ -32,6 +24,7 @@ $ads_color: yellow;
 .video {
   min-height: 200px;
   min-width: 200px;
+  width: 70%;
   position: relative;
   video{
     width: 100%;
@@ -39,7 +32,7 @@ $ads_color: yellow;
 }
 .control {
   position: absolute;
-  top: 10px;
+  bottom: 1px;
   z-index: 1000;
   width: 100%;
 
@@ -59,20 +52,22 @@ $ads_color: yellow;
     position: absolute;
     top: 0;
     left: 0;
-    width: 1000px;
+    width: 99%;
+    right: 0;
+    margin: auto;
+
     //transition: all .4s;
     height: $progress_normal_height;
-    background-color: rgba(255, 255, 255, 0.2);
     //pointer-events: none;
 
     .buffered-progress {
       background: $buffered_color;
-      width: 200px;
+      width: 0;
       height: 100%;
       .inner{
         position: relative;
-        background: $palyer_color;
-        width: 200px;
+        background: $player_color;
+        width: 0;
         height: 100%;
         .point {
           opacity: 0;
@@ -83,7 +78,7 @@ $ads_color: yellow;
           z-index: 300;
           left: 0;
           margin: auto;
-          background: $palyer_color;
+          background: $player_color;
           width: $progress_point_size;
           height: $progress_point_size;
           border-radius: $progress_point_size;
@@ -104,10 +99,14 @@ $ads_color: yellow;
   }
   .btns {
     ul{
+      padding: 0 14px;
       @include flex;
       .control-left {
         flex: 1;
         display: flex;
+      }
+      .setting-wrap {
+        position: relative;
       }
       li {
         span {
@@ -126,14 +125,75 @@ $ads_color: yellow;
             fill: #fff;
           }
         }
-        .volume-btn {
-          width: 20px;
-        }
         .setting-btn, .movie-btn, .fullscreen, .next-btn {
           height: 100%;
-          width: 32px;
+          width: 36px;
+          transition: transform .5s;
           svg {
             fill: #fff;
+          }
+        }
+        .fullscreen {
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+        .setting-menu {
+          display: none;
+          position: absolute;
+          bottom: 50px;
+          right: 50%;
+          width: 189px;
+          height: 112px;
+          transition: all .5s;
+          border-radius: 3px;
+          background-color: rgba(28, 28, 28, 0.9);
+          &>div {
+            display: flex;
+            padding: 10px;
+            height: 33px;
+            font-size: 14px;
+            &:hover {
+              background-color: rgba(255,255,255,.1);
+              cursor: pointer;
+            }
+            p {
+              color: #fff;
+              flex: 1;
+            }
+            &>p:nth-of-type(1){
+              text-align: left;
+            }
+            &>p:nth-of-type(2) {
+              text-align: right;
+              i {
+                font-weight: 600;
+              }
+            }
+          }
+        }
+        .speed-menu {
+          display: none;
+          position: absolute;
+          right: 30%;
+          width: 99px;
+          height: 290px;
+          border-radius: 3px;
+          background-color: rgba(28, 28, 28, 0.9);
+          bottom: 50px;
+          p {
+            &:hover {
+              background-color: rgba(255, 255, 255, .1);
+              cursor: pointer;
+            }
+            height: 33px;
+            text-align: center;
+            color: #fff;
+            line-height: 33px;
+            font-size: 12px;
+          }
+          &>p:nth-of-type(1) {
+            border-bottom: 1px solid #fff;
           }
         }
       }
