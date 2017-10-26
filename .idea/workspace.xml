@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="605ad721-44db-4fab-891a-f1fc86cf3293" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/styles/test.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/styles/video.css" afterPath="$PROJECT_DIR$/styles/video.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/styles/video.css.map" afterPath="$PROJECT_DIR$/styles/video.css.map" />
@@ -24,6 +22,7 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="videoPlayer" />
   </component>
@@ -32,8 +31,18 @@
       <file leaf-file-name="video.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/video.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="331" column="0" lean-forward="false" selection-start-line="331" selection-start-column="0" selection-end-line="331" selection-end-column="0" />
+            <state relative-caret-position="6840">
+              <caret line="379" column="100" lean-forward="false" selection-start-line="379" selection-start-column="100" selection-end-line="379" selection-end-column="100" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -42,8 +51,8 @@
       <file leaf-file-name="video.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/styles/video.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="566">
-              <caret line="155" column="9" lean-forward="false" selection-start-line="155" selection-start-column="9" selection-end-line="155" selection-end-column="9" />
+            <state relative-caret-position="253">
+              <caret line="61" column="18" lean-forward="false" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -61,16 +70,14 @@
       </file>
       <file leaf-file-name="video.css.map" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/styles/video.css.map">
-          <provider editor-type-id="sourcemapFileViewerProvider">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="46">
-              <caret line="2" column="43" lean-forward="false" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
-              <folding>
-                <marker date="1508926146000" expanded="true" signature="0:2290" ph="{&quot;version&quot;: 3...}" />
-              </folding>
+              <caret line="2" column="26" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+              <folding />
             </state>
+          </provider>
+          <provider editor-type-id="sourcemapFileViewerProvider">
+            <state />
           </provider>
         </entry>
       </file>
@@ -79,7 +86,24 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="46">
               <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1509002568000" expanded="true" signature="308:418" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="488:519" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="544:603" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="625:699" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="1136:1350" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="1418:1609" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="1630:1652" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="1689:1728" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="1759:1856" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="1928:1970" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="2226:2248" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="2386:2428" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="2621:2781" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="2785:2814" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="2834:2922" ph="{...}" />
+                <marker date="1509002568000" expanded="true" signature="3087:3105" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -89,8 +113,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="SCSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -116,6 +140,10 @@
       <find>js-button</find>
       <find>svgicon</find>
       <find>this</find>
+      <find>getLeft</find>
+      <find>video-progress-inner'</find>
+      <find>pointer-events</find>
+      <find>progress-wrap</find>
     </findStrings>
     <replaceStrings>
       <replace>video</replace>
@@ -129,6 +157,7 @@
       <list>
         <option value="$PROJECT_DIR$/styles/video.css" />
         <option value="$PROJECT_DIR$/styles/test.scss" />
+        <option value="$PROJECT_DIR$/test.html" />
         <option value="$PROJECT_DIR$/styles/video.scss" />
         <option value="$PROJECT_DIR$/video.html" />
       </list>
@@ -147,7 +176,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds">
     <option name="width" value="1920" />
     <option name="height" value="1080" />
   </component>
@@ -166,30 +195,22 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
-          <expand>
-            <path>
-              <item name="youtube-player" type="b2602c69:ProjectViewProjectNode" />
-              <item name="youtube-player" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="youtube-player" type="b2602c69:ProjectViewProjectNode" />
-              <item name="youtube-player" type="462c0819:PsiDirectoryNode" />
-              <item name="styles" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="youtube-player" type="b2602c69:ProjectViewProjectNode" />
-              <item name="youtube-player" type="462c0819:PsiDirectoryNode" />
-              <item name="styles" type="462c0819:PsiDirectoryNode" />
-              <item name="video.scss" type="620a8d5e:NestingTreeNode" />
-            </path>
-          </expand>
-          <select />
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="videoPlayer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="videoPlayer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -218,13 +239,8 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <envs />
+    <configuration default="true" type="#com.siberika.idea.pascal.run.PascalConfigurationType" factoryName="Pascal executable">
+      <method />
     </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
@@ -250,13 +266,19 @@
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
       <method />
     </configuration>
-    <configuration default="true" type="#com.siberika.idea.pascal.run.PascalConfigurationType" factoryName="Pascal executable">
-      <method />
-    </configuration>
     <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
       <option name="cucumberJsArguments" value="" />
       <option name="executablePath" />
       <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -293,11 +315,12 @@
       <workItem from="1508705900578" duration="20395000" />
       <workItem from="1508909827925" duration="1521000" />
       <workItem from="1508913213430" duration="11074000" />
+      <workItem from="1508938739836" duration="17679000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32990000" />
+    <option name="totallyTimeSpent" value="50669000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -312,7 +335,7 @@
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09010417" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0900474" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291262" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -349,7 +372,7 @@
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="processedProjectFiles" value="true" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -361,6 +384,66 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/video.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/video.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3565">
+          <caret line="155" column="9" lean-forward="false" selection-start-line="155" selection-start-column="9" selection-end-line="155" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/test.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/video.css.map">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="43" lean-forward="false" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/video.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <marker date="1509002568000" expanded="true" signature="308:418" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="488:519" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="544:603" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="625:699" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1136:1350" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1418:1609" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1630:1652" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1689:1728" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1759:1856" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1928:1970" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2226:2248" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2386:2428" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2621:2781" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2785:2814" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2834:2922" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="3087:3105" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/video.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2346">
@@ -378,23 +461,38 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/styles/video.css.map">
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
           <caret line="2" column="43" lean-forward="false" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
-          <folding>
-            <marker date="1508926146000" expanded="true" signature="0:2290" ph="{&quot;version&quot;: 3...}" />
-          </folding>
+          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/styles/video.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1509002568000" expanded="true" signature="308:418" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="488:519" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="544:603" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="625:699" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1136:1350" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1418:1609" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1630:1652" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1689:1728" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1759:1856" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1928:1970" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2226:2248" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2386:2428" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2621:2781" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2785:2814" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2834:2922" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="3087:3105" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -415,16 +513,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/styles/video.css.map">
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1508926146000" expanded="true" signature="0:2290" ph="{&quot;version&quot;: 3...}" />
-          </folding>
+          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/styles/video.scss">
@@ -439,20 +535,68 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1127">
           <caret line="49" column="17" lean-forward="false" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
-          <folding />
+          <folding>
+            <marker date="1509002568000" expanded="true" signature="308:418" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="488:519" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="544:603" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="625:699" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1136:1350" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1418:1609" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1630:1652" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1689:1728" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1759:1856" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1928:1970" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2226:2248" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2386:2428" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2621:2781" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2785:2814" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2834:2922" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="3087:3105" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/video.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <marker date="1509002568000" expanded="true" signature="308:418" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="488:519" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="544:603" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="625:699" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1136:1350" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1418:1609" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1630:1652" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1689:1728" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1759:1856" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="1928:1970" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2226:2248" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2386:2428" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2621:2781" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2785:2814" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="2834:2922" ph="{...}" />
+            <marker date="1509002568000" expanded="true" signature="3087:3105" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/styles/video.css.map">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="26" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="sourcemapFileViewerProvider">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/video.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="43" lean-forward="false" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
-          <folding>
-            <marker date="1508926146000" expanded="true" signature="0:2290" ph="{&quot;version&quot;: 3...}" />
-          </folding>
+        <state relative-caret-position="253">
+          <caret line="61" column="18" lean-forward="false" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -464,26 +608,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/styles/video.css">
+    <entry file="file://$PROJECT_DIR$/test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/styles/video.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="155" column="9" lean-forward="false" selection-start-line="155" selection-start-column="9" selection-end-line="155" selection-end-column="9" />
+        <state relative-caret-position="253">
+          <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/video.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="331" column="0" lean-forward="false" selection-start-line="331" selection-start-column="0" selection-end-line="331" selection-end-column="0" />
+        <state relative-caret-position="6840">
+          <caret line="379" column="100" lean-forward="false" selection-start-line="379" selection-start-column="100" selection-end-line="379" selection-end-column="100" />
           <folding />
         </state>
       </provider>

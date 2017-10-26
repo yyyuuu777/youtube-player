@@ -22,7 +22,7 @@
         <div class="progress" id="progress-wrap">
             <div class="buffered-progress" id="buffered-progress">
                 <div class="inner" id="video-progress-inner">
-                    <div class="point" id="progress-point"></div>
+                    <div class="point" id="progress-point" ></div>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
                     </li>
                     <li></li>
                     <li class="video-time">
-                        <span>0:20</span>
+                        <span id="video-current-time">0:20</span>
                         <span>/</span>
                         <span id="video-duration"></span>
                     </li>
@@ -138,14 +138,15 @@
 </div>
 </section>
 
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 
 <script>
 
     // in method better not deal global|out data
     // todo:// provide dash interface, implement same method to use this video player
     // todo:// ads insert
-    let num = 0;
-
+    let num = 0
+    let log_tag = true
     class Util {
         getDom(id) {
             return document.getElementById(id)
@@ -262,6 +263,7 @@
             let ui_progress = util.getDom('video-progress-inner')
             let ui_progress_point = util.getDom('progress-point')
             let ui_buffered = util.getDom('buffered-progress')
+            let ui_video_current_time = util.getDom('video-current-time')
             let ui_duration = util.getDom('video-duration')
             let ui_progress_wrap_width = ui_progress_wrap.clientWidth
             util.log(`get progress wrap width is ----> ${ui_progress_wrap_width}`)
@@ -270,8 +272,9 @@
                     util.log(`ui ----> setting ---> ${key}`)
                     if (Object.is('currentTime', key)) {
                         // 这里可以使用函数式编程, 进度宽度 = 进度宽度/总进度  * 当前事件/总时间
-                        ui_progress_point.style.left = ui_progress.style.width = `${this.cal_current_progress_buffered_width(value, this.video_info.duration, ui_progress_wrap_width)()}px`
+                        ui_progress.style.width = ui_progress_point.style.left = `${this.cal_current_progress_buffered_width(value, this.video_info.duration, ui_progress_wrap_width)()}px`
                         ui_buffered.style.width = `${this.cal_current_progress_buffered_width(this.video_info.buffered, this.video_info.duration, ui_progress_wrap_width)()}px`
+                        ui_video_current_time.innerHTML = this.format_duration(value.toFixed(0))
                     } if (Object.is('duration', key)) {
                          ui_duration.innerHTML = this.format_duration(value.toFixed(0))
                          // set yellow point
@@ -320,10 +323,71 @@
         }
 
         init_event () {
+            // todo:// add event init Dom like android
             let ui_fullScreen = util.getDom('full-screen');
+            let ui_progress_point = util.getDom('progress-point')
+            let ui_progress_wrap = util.getDom('progress-wrap')
+            let ui_progress = util.getDom('video-progress-inner')
             this.bind_event(ui_fullScreen, 'click', () => {
                 this.full_screen()
             })
+            let drag = false
+            this.bind_event(ui_progress_wrap, 'mousedown', (e) => {
+                drag = true;
+                this.video.pause()
+                console.log('mouse donw 事件执行')
+                    this.update_progress_after_drag(e.pageX);
+
+            })
+                $(document).mouseup( (e) => {
+                     if(drag) {
+                        drag = false;
+                        this.video.pause()
+                             this.update_progress_after_drag(e.pageX);
+                        console.log('mouse up 事件执行')
+                     }
+                })
+
+            $(document).mousemove( (e) => {
+                console.log('---------------------------mouser over事件执行')
+                if(drag) {
+                        this.update_progress_after_drag(e.pageX);
+                }
+            })
+
+        }
+
+        update_progress_after_drag (x) {
+            let ui_fullScreen = util.getDom('full-screen');
+            let ui_progress_point = util.getDom('progress-point')
+            let ui_progress_wrap = util.getDom('progress-wrap')
+            let ui_progress = util.getDom('video-progress-inner')
+            let ui_video_current_time = util.getDom('video-current-time')
+            // - process.offset.left
+            let position = x - $('#progress-point').offset().left
+            console.log('------------','mouse position is ------->'+x, 'point offset screen left is '+this.get_offset_left(ui_progress_point), 'pageX change distance is -->'+position)
+//            var percentage = 100 * position / ui_progress_wrap.style.width;
+//            if(percentage > 100) {
+//                percentage = 100;
+//            }
+//            if(percentage < 0) {
+//                percentage = 0;
+//            }
+            // set progress postion
+                ui_progress_point.style.left = ui_progress.style.width = position + parseInt(ui_progress.style.width) + 'px'
+            // todo:// 此时 wrap width 为 null? !!!! witdth 与 client width 耗时并不是没有理由的 你对 js 原生 dom 这些属性 不熟悉！
+                console.log('after drag postion is ------->', ui_progress.clientWidth, ui_progress_point.style.left)
+                console.log('currentTime', parseInt(ui_progress.style.width), ui_progress_wrap.clientWidth, this.video_info.duration)
+                this.video.currentTime = parseInt(ui_progress.style.width) / parseInt(ui_progress_wrap.clientWidth) * this.video_info.duration
+            // todo:// ui_video_current_time =
+
+        }
+
+        get_offset_left(e){
+            var offset=parseInt(e.offsetLeft)
+            if(e.offsetParent!=null) offset+=this.get_offset_left(e.offsetParent);
+            util.i(offset)
+            return offset;
         }
 
         full_screen (elem = this.video) {
@@ -336,21 +400,28 @@
         }
 
         bind_event(target, type, callBack){
-           target.addEventListener(type, function () {
-               callBack()
+           target.addEventListener(type, function (e) {
+               callBack(e)
            })
         }
     }
 
 
     let video = util.getDom('video')
+    //todo:// set play speed
+    video.playbackRate = 2
+    // todo:// set video lock
     let video_obj = new Controller(video)
     video_obj.init()
+
+    // recalculate window
+    window.addEventListener('resize', function () {
+        video_obj.init()
+    })
 
 
 </script>
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js "></script>
 
 <script>
