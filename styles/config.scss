@@ -4,3 +4,87 @@ $progress_point_size: 13px;
 $progress_normal_height: 3px;
 $progress_active_height: 5px;
 $ads_color: yellow;
+$control_text_color: #eee;
+$control_progress_wrap_color: rgba(255, 255, 255, 0.2) ;
+$video_status_btn: 30px;
+$video_status_btn_1: 50px;
+$video_status_btn_2: 60px;
+$video_status_btn_3: 70px;
+$video_status_btn_4: 80px;
+$video_status_btn_5: 100px;
+
+@keyframes video_status {
+
+  from{
+      opacity: 0;
+      width: $video_status_btn_1;
+      height: $video_status_btn_1;
+      border-radius: $video_status_btn_1;
+  }
+  to{
+      opacity: 1;
+      width: $video_status_btn_5;
+      height: $video_status_btn_5;
+      border-radius: $video_status_btn_5;
+  }
+
+  //0% {
+  //  opacity: 0;
+  //  width: $video_status_btn_1;
+  //  height: $video_status_btn_1;
+  //  border-radius: $video_status_btn_1;
+  //}
+  //
+  //25% {
+  //  opacity: 0.3;
+  //  width: $video_status_btn_2;
+  //  height: $video_status_btn_2;
+  //  border-radius: $video_status_btn_2;
+  //}
+  //
+  //50%{
+  //  opacity: 0.5;
+  //  width: $video_status_btn_3;
+  //  height: $video_status_btn_3;
+  //  border-radius: $video_status_btn_3;
+  //}
+  //
+  //75% {
+  //  opacity: 0.7;
+  //  width: $video_status_btn_4;
+  //  height: $video_status_btn_4;
+  //  border-radius: $video_status_btn_4;
+  //}
+  //
+  //100% {
+  //  opacity: 0.3;
+  //  width: $video_status_btn_5;
+  //  height: $video_status_btn_5;
+  //  border-radius: $video_status_btn_5;
+  //}
+  
+}
+
+//@-webkit-keyframes video_status /* Safari and Chrome */
+//{
+//  0% {
+//    opacity: 0;
+//    width: $video_status_btn_1;
+//    height: $video_status_btn_1;
+//    border-radius: $video_status_btn_1;
+//  }
+//
+//  50% {
+//    opacity: 0.7;
+//    width: $video_status_btn_2;
+//    height: $video_status_btn_2;
+//    border-radius: $video_status_btn_2;
+//  }
+//
+//  100% {
+//    opacity: 1;
+//    width: $video_status_btn_3;
+//    height: $video_status_btn_3;
+//    border-radius: $video_status_btn_3;
+//  }
+//}

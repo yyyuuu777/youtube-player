@@ -15,11 +15,28 @@
 
 <div class="video" id="video-wrap">
     <!--video-background-->
+    <section class="video-status-btn" id="video-status-btn">
+
+            <svg width="100%" height="100%" viewBox="0 0 36 36" fill="#fff" id="play-status">
+        <path id="pause-icon" data-state="playing"
+              d="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26"/>
+        </svg>
+
+        <svg width="100%" height="100%" viewBox="0 0 36 36" fill="#fff" id="pause-status">
+            <path id="play-icon" data-state="paused"
+                  d="M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28"/>
+        </svg>
+
+    </section>
+
+
+
     <div class="" id="fullscreen-wrap">
     <div class="video-foreground">
     <video src="http://vjs.zencdn.net/v/oceans.mp4"   id="video"></video>
-    <section class="control">
-        <div class="progress" id="progress-wrap">
+    <section class="control" id="bottom-control">
+        <div class="progress" id="progress-wrap" >
+            <div class="hover-wrap" id="hover-wrap"></div>
             <div class="buffered-progress" id="buffered-progress">
                 <div class="inner" id="video-progress-inner">
                     <div class="point" id="progress-point" ></div>
@@ -29,7 +46,7 @@
         <div class="btns">
             <ul>
                 <!--player button-->
-                <div class="control-left">
+                <div class="control-left" id="control-left">
                     <li>
                         <div class="player-btn">
                             <button class="button js-button">
@@ -58,7 +75,7 @@
 
                     </li>
                     <li>
-                        <div class="volume-btn">
+                        <div class="volume-btn" id="volume-btn">
                             <button class="volume">
                                 <svg width="100%" height="100%" id="svg-volume" viewBox="0 0 36 36">
                                     <defs>
@@ -70,10 +87,10 @@
                             </button>
                         </div>
                     </li>
-                    <li class="volume-control">
-                       <div class="volume-out">
-                           <div class="volume-inner">
-                               <div class="volume-point"></div>
+                    <li class="volume-control" id="volume-control">
+                       <div class="volume-out" id="volume-out">
+                           <div class="volume-inner" id="volume-inner">
+                               <div class="volume-point" id="volume-point"></div>
                            </div>
                        </div>
                     </li>
@@ -84,6 +101,7 @@
                     </li>
                 </div>
                 <li class="setting-wrap">
+                    <p class="speed-tag" id="speed-tag">1.0</p>
                     <button class="setting-btn" id="setting-btn" data-state="close">
                         <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
                             <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -101,7 +119,7 @@
                         </section>
 
                         <section class="speed-menu" id="speed-menu">
-                            <p id="back-setting-parent"> < 返回</p>
+                            <p id="back-setting-parent"> < &nbsp;&nbsp;&nbsp;&nbsp;Speed</p>
                             <p class="speed-value"> 0.25 </p>
                             <p class="speed-value"> 0.5  </p>
                             <p class="speed-value"> 0.75 </p>
@@ -251,7 +269,19 @@
                 ui_speed_array: [...util.getDom('.speed-value')],
                 ui_back_setting: util.getDom('back-setting-parent'),
                 ui_theater_btn: util.getDom('theater-btn'),
-                ui_video_wrap: util.getDom('video-wrap')
+                ui_video_wrap: util.getDom('video-wrap'),
+                ui_volume_out: util.getDom('volume-out'),
+                ui_volume_inner: util.getDom('volume-inner'),
+                ui_volume_point: util.getDom('volume-point'),
+                ui_volume_control: util.getDom('volume-control'),
+                ui_volume_btn: util.getDom('volume-btn'),
+                ui_control_left: util.getDom('control-left'),
+                ui_hover_wrap: util.getDom('hover-wrap'),
+                ui_speed_tag: util.getDom('speed-tag'),
+                ui_bottom_control: util.getDom('bottom-control'),
+                ui_video_status_pause: util.getDom('video-status-btn'),
+                ui_pause_status: util.getDom('pause-status'),
+                ui_play_status: util.getDom('play-status'),
             }
         }
 
@@ -260,12 +290,38 @@
             this.listen()
             this.proxy_video_info = this.proxy_render_to_view()
             this.init_event()
+            window.onload =  () => {
+                this.init_volume()
+            }
+        }
+
+        /**
+         * after video relative size change
+         */
+        recalcute_dom () {
+            this.proxy_video_info = this.proxy_render_to_view()
+        }
+
+        init_volume () {
+            // todo :// this 50 have issue
+            let ui_volume_width = parseInt(this.get_out_css(this.doms.ui_volume_out)['width']) || 50
+            this.video.volume = 10 / ui_volume_width
+            this.doms.ui_volume_inner.style.width = this.doms.ui_volume_point.style.left = '10px'
         }
 
         sync_video_info(video_info = this.video_info) {
             video_info.currentTime = this.video.currentTime
             video_info.volume = this.video.volume
             video_info.buffered = this.video.buffered.end(0)
+        }
+
+        get_out_css (ele) {
+            if(typeof ele.currentStyle!=='undefined') {
+                var style = ele.currentStyle
+            } else if(typeof window.getComputedStyle!=='undefined') {
+                var style = window.getComputedStyle(ele, null);
+            }
+            return style
         }
 
         listen() {
@@ -309,7 +365,6 @@
 
         // The video attribute is delegated to the following method, bind data - view
         proxy_render_to_view() {
-
 
             let progress_wrap_width = this.doms.ui_progress_wrap.clientWidth
             util.log(`get progress wrap width is ----> ${progress_wrap_width}`)
@@ -374,7 +429,8 @@
             this.bind_event(this.doms.ui_fullScreen, 'click', () => {
                 this.full_screen()
             })
-            let drag = false
+
+            let drag = false, volume_drag = false
             this.bind_event(this.doms.ui_progress_wrap, 'mousedown', (e) => {
                 drag = true;
                 this.video.pause()
@@ -382,24 +438,52 @@
                     this.update_progress_after_drag(e.pageX);
 
             })
-                $(document).mouseup( (e) => {
-                     if(drag) {
-                        drag = false;
-                        this.video.pause()
-                             this.update_progress_after_drag(e.pageX);
-                        console.log('mouse up 事件执行')
-                     }
-                })
+
+            this.bind_event(this.doms.ui_progress_wrap, 'mousemove', (e) => {
+                let width = `${e.pageX - $('#hover-wrap').offset().left}px`
+                this.doms.ui_hover_wrap.style.width = width
+            })
+
+            this.bind_event(this.doms.ui_progress_wrap, 'mouseover', (e) => {
+                let width = `${e.pageX - $('#hover-wrap').offset().left}px`
+                this.doms.ui_hover_wrap.style.width = width
+            })
+
+            this.bind_event(this.doms.ui_progress_wrap, 'mouseleave', (e) => {
+                this.doms.ui_hover_wrap.style.width = 0
+            })
+
+            // set volume event
+            this.bind_event(this.doms.ui_volume_out, 'mousedown', e => {
+                volume_drag = true
+                this.update_volume_drag(e.pageX)
+            })
+
+
+            $(document).mouseup( (e) => {
+                if(drag) {
+                    drag = false;
+                    this.video.pause()
+                    this.update_progress_after_drag(e.pageX);
+                    util.log('mouse up 事件执行')
+                } else if (volume_drag) {
+                   // update volume
+                    volume_drag = false
+                    this.update_volume_drag(e.pageX)
+                }
+            })
 
             $(document).mousemove( (e) => {
-                console.log('---------------------------mouser over事件执行')
+                util.log('mousemove 事件执行')
                 if(drag) {
-                        this.update_progress_after_drag(e.pageX);
+                    this.update_progress_after_drag(e.pageX);
+                } else if (volume_drag) {
+                    this.update_volume_drag(e.pageX)
                 }
             })
 
             this.bind_event(this.doms.ui_video_speed_parent_menu, 'click', (e) => {
-                this.doms.ui_video_speed_menu.style.display = 'block'
+                this.show_speed_menu()
                 this.hide_setting_menu()
             })
 
@@ -421,7 +505,7 @@
                     let speed = e.currentTarget.innerHTML
                     speed = this.equal('normal', speed) ? 1 : speed
                     if (Number.isInteger(parseInt(speed))) {
-                         this.video.playbackRate = speed
+                        this.doms.ui_speed_tag.innerHTML = this.video.playbackRate = speed === 1 ? 1.0 : speed
                          this.hide_speed_menu()
                     } else {
                         throw new Error ('speed is need number')
@@ -437,15 +521,71 @@
 
             this.bind_event(this.doms.ui_theater_btn, 'click', e => {
                 this.toggle_theater()
+                this.recalcute_dom()
             })
 
+            this.bind_event(this.doms.ui_volume_btn, 'mouseover', () => {
+                this.show_volume_control()
+            })
+
+            this.bind_event(this.doms.ui_control_left, 'mouseleave', () => {
+                this.hide_volume_control()
+            })
+
+            this.bind_event(this.doms.ui_video_wrap, 'mouseover', e => {
+               this.show_bottom_control()
+            })
+
+            this.bind_event(this.doms.ui_video_wrap, 'mouseleave', e => {
+                this.hide_bottom_control()
+            })
+
+            this.bind_event(this.video, 'click', e => {
+                // this.doms.ui_video_status_pause.style.opacity = 1
+                // todo:// should after video can play
+                if (this.video.paused) {
+                    this.video.play()
+                   this.doms.ui_play_status.style.display = 'block'
+                }
+                else {
+                    this.video.pause()
+                    this.doms.ui_pause_status.style.display = 'block'
+                }
+                this.doms.ui_video_status_pause.style.animation = 'video_status .3s'
+                setTimeout( () => {
+                    this.doms.ui_video_status_pause.style.animation = ''
+                    this.doms.ui_play_status.style.display = 'none'
+                    this.doms.ui_pause_status.style.display = 'none'
+                },400)
+            })
+
+        }
+
+        show_bottom_control () {
+            this.doms.ui_bottom_control.style.opacity = 1
+        }
+
+        hide_bottom_control () {
+            this.doms.ui_bottom_control.style.opacity = 0
+        }
+
+        show_volume_control () {
+            this.doms.ui_volume_control.style.opacity = 1
+            this.doms.ui_volume_control.style.width = '50px'
+        }
+
+        hide_volume_control () {
+           this.doms.ui_volume_control.style.opacity = 0
+           this.doms.ui_volume_control.style.width = '0'
         }
 
         toggle_theater () {
             if (this.doms.ui_video_wrap.style.width === '100%'){
                 this.doms.ui_video_wrap.style.width = '70%'
+                this.doms.ui_theater_btn.style.transform = 'scale(1)'
             } else {
                 this.doms.ui_video_wrap.style.width = '100%'
+                this.doms.ui_theater_btn.style.transform = 'scale(0.8)'
             }
 
         }
@@ -491,22 +631,38 @@
         update_progress_after_drag (x) {
             // - process.offset.left
             let position = x - $('#progress-point').offset().left
-            console.log('------------','mouse position is ------->'+x, 'point offset screen left is '+this.get_offset_left(this.doms.ui_progress_point), 'pageX change distance is -->'+position)
-//            var percentage = 100 * position / this.doms.ui_progress_wrap.style.width;
-//            if(percentage > 100) {
-//                percentage = 100;
-//            }
-//            if(percentage < 0) {
-//                percentage = 0;
-//            }
             // set progress postion
-                this.doms.ui_progress_point.style.left = this.doms.ui_progress.style.width = position + parseInt(this.doms.ui_progress.style.width) + 'px'
+            let progress_wrap_width = parseInt(this.doms.ui_progress_wrap.clientWidth)
+            let pos = position + parseInt(this.doms.ui_progress.style.width)
+            pos = pos < 0 ? 0 : pos > progress_wrap_width ? progress_wrap_width : pos
+            this.doms.ui_progress_point.style.left = this.doms.ui_progress.style.width = `${pos}px`
             // todo:// 此时 wrap width 为 null? !!!! witdth 与 client width 耗时并不是没有理由的 你对 config 原生 dom 这些属性 不熟悉！
-                console.log('after drag postion is ------->', this.doms.ui_progress.clientWidth, this.doms.ui_progress_point.style.left)
-                console.log('currentTime', parseInt(this.doms.ui_progress.style.width), this.doms.ui_progress_wrap.clientWidth, this.video_info.duration)
-                this.video.currentTime = parseInt(this.doms.ui_progress.style.width) / parseInt(this.doms.ui_progress_wrap.clientWidth) * this.video_info.duration
+            // todo:// 这里用  .style.width ?
+
+                this.video.currentTime = parseInt(this.doms.ui_progress.style.width) / progress_wrap_width * this.video_info.duration
             // todo:// this.doms.ui_video_current_time =
 
+        }
+
+        update_volume_drag (x) {
+            let position = x - $('#volume-point').offset().left
+            let pos = position + parseInt(this.doms.ui_volume_inner.clientWidth)
+            let volume_out_width = parseInt(this.doms.ui_volume_out.clientWidth)
+            console.log(pos)
+            pos = pos < 0 ? 0 : pos > volume_out_width ? volume_out_width : pos
+             this.doms.ui_volume_point.style.left =  this.doms.ui_volume_inner.style.width =  `${pos}px`
+            //  max volume in  { 0 - 1 }
+            let volume = parseInt(this.doms.ui_volume_inner.style.width) / volume_out_width
+            console.log('volume is ->', volume)
+            this.video.volume = volume
+            // volume === 0 change svg
+            if (volume === 0) {
+                playButton1.goMute()
+            } else {
+                playButton1.goMed()
+            }
+
+            util.log(this.doms.ui_volume_inner.style.width, this.doms.ui_volume_out.clientWidth)
         }
 
         get_offset_left(e){
@@ -516,12 +672,24 @@
             return offset;
         }
 
+        hide_theater_btn () {
+            this.doms.ui_theater_btn.style.display = 'none'
+        }
+
+        show_theater_btn () {
+            this.doms.ui_theater_btn.style.display = 'block'
+        }
+
         full_screen (elem = this.video) {
             let btn_fullscreen = util.getDom('fullscreen-wrap')
             if (btn_fullscreen.classList.contains('video-background')) {
-              btn_fullscreen.classList.remove('video-background')
+                btn_fullscreen.classList.remove('video-background')
+                 this.show_theater_btn()
+                 this.recalcute_dom()
             } else {
               btn_fullscreen.classList.add('video-background')
+                this.hide_theater_btn()
+                this.recalcute_dom()
             }
         }
 
@@ -534,15 +702,17 @@
 
     let video = util.getDom('video')
     //todo:// set play speed
-    video.playbackRate = 2
     // todo:// set video lock
     let video_obj = new Controller(video)
     video_obj.init()
 
     // recalculate window
     window.addEventListener('resize', function () {
-        video_obj.init()
+        video_obj.recalcute_dom()
+
     })
+
+    // todo:// watch video width
 
 
 </script>
@@ -635,10 +805,32 @@
             this.goToNextState()
             path.animate({
                 d: this.stateIconPath()
-            }, 500, mina.linear);
+            }, 500, mina.easein);
+        },
+        goMute: function () {
+            var path = Snap.select('.js-icon2');
+            this.state = this.nextState['med']
+            path.animate({
+                d: this.stateIconPath()
+            }, 100, mina.easein);
+        },
+        goMed: function () {
+            var path = Snap.select('.js-icon2');
+            this.state = this.nextState['mute']
+            path.animate({
+                d: this.stateIconPath()
+            }, 100, mina.easein);
         },
         goToNextState: function () {
+            video_obj.doms.ui_volume_control.style.display = 'block'
             this.state = this.nextState[this.state];
+            if (this.state === 'mute') {
+               video.volume = 0
+               video_obj.doms.ui_volume_inner.style.width = video_obj.doms.ui_volume_point.style.left = 0
+            } else {
+                video.volume = 10 / video_obj.doms.ui_volume_out.clientWidth
+                video_obj.doms.ui_volume_inner.style.width = video_obj.doms.ui_volume_point.style.left = '10px'
+            }
         },
         stateIconPath: function () {
             return this.iconEls[this.state].getAttribute("d");
