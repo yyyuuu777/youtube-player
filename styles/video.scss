@@ -25,6 +25,7 @@ li{
   min-height: 200px;
   min-width: 200px;
   width: 70%;
+  overflow: hidden;
   position: relative;
   .video-status-btn {
     position: absolute;
@@ -33,15 +34,15 @@ li{
     right: 0;
     bottom: 0;
     margin: auto;
-    padding: 20px;
+    padding: 5px;
     height: $video_status_btn;
     width: $video_status_btn;
     border-radius: $video_status_btn;
     opacity: 0;
     z-index: 1000;
-    background-color: rgba(28, 28, 28, 0.3);
+    background-color: rgba(0, 0, 0, .5);
     svg {
-      display: none;
+     display: none;
     }
   }
   video{

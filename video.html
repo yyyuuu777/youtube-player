@@ -545,13 +545,14 @@
                 // todo:// should after video can play
                 if (this.video.paused) {
                     this.video.play()
-                   this.doms.ui_play_status.style.display = 'block'
+                    this.doms.ui_play_status.style.display = 'block'
                 }
                 else {
                     this.video.pause()
                     this.doms.ui_pause_status.style.display = 'block'
                 }
-                this.doms.ui_video_status_pause.style.animation = 'video_status .3s'
+                playButton.toggle()
+                this.doms.ui_video_status_pause.style.animation = 'video_status .3s linear'
                 setTimeout( () => {
                     this.doms.ui_video_status_pause.style.animation = ''
                     this.doms.ui_play_status.style.display = 'none'

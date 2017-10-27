@@ -6,26 +6,16 @@ $progress_active_height: 5px;
 $ads_color: yellow;
 $control_text_color: #eee;
 $control_progress_wrap_color: rgba(255, 255, 255, 0.2) ;
-$video_status_btn: 30px;
-$video_status_btn_1: 50px;
-$video_status_btn_2: 60px;
-$video_status_btn_3: 70px;
-$video_status_btn_4: 80px;
-$video_status_btn_5: 100px;
+$video_status_btn: 40px;
 
 @keyframes video_status {
 
-  from{
-      opacity: 0;
-      width: $video_status_btn_1;
-      height: $video_status_btn_1;
-      border-radius: $video_status_btn_1;
-  }
-  to{
+  0%{
       opacity: 1;
-      width: $video_status_btn_5;
-      height: $video_status_btn_5;
-      border-radius: $video_status_btn_5;
+  }
+  100%{
+      opacity: 0;
+      transform: scale(2);
   }
 
   //0% {
