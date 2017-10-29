@@ -22,16 +22,17 @@
 <body>
 
 <div class="dd">
-    <p>1</p>
+    <p>9</p>
 </div>
+<script src="./test.js"></script>
 <script>
     document.addEventListener('mouseup', function () {
-        alert(1)
     })
     document.querySelector('p').addEventListener('click', function (e) {
         alert(2)
-         e.stopPropagation();
-
+    })
+    document.querySelector('.dd').addEventListener('click', function (e) {
+        alert(2)
     })
 </script>
 

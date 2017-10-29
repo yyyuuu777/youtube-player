@@ -1,4 +1,5 @@
 @import "config";
+@import "spinner";
 // reset
 html, body, *{
   padding: 0;
@@ -25,6 +26,7 @@ li{
   min-height: 200px;
   min-width: 200px;
   width: 70%;
+  background: #000;
   overflow: hidden;
   position: relative;
   .video-status-btn {
@@ -162,6 +164,7 @@ li{
         .player-btn, .volume-btn{
           height: 100%;
           width: 36px;
+          margin-right: 3px;
           button {
             height: 100%;
           }
