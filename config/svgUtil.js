@@ -84,3 +84,7 @@ function $ () {
       }
    }
 }
+
+$.prototype.attr = function () {
+    
+}
