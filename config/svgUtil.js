@@ -7,7 +7,6 @@ export default class SvgUtil {
         video,
         states,
         svgWrapClass,
-        btnStateId,
         useDomId,
         svgId,
         snapAnimation,
@@ -22,8 +21,8 @@ export default class SvgUtil {
         this.snapAnimation = snapAnimation
         this.el = document.querySelector(svgWrapClass)
         this.iconEls = {
-            playing: document.querySelector(`#${btnStateId[0]}`),
-            paused: document.querySelector(`#${btnStateId[1]}`),
+            [this.states[0].name]: document.querySelector(`#${this.states[0].name}`),
+            [this.states[1].name]: document.querySelector(`#${this.states[1].name}`),
         }
     }
 
@@ -37,10 +36,10 @@ export default class SvgUtil {
         ele.parentNode.removeChild(ele);
         // $(".js-button").find("use").remove();
         Snap(`#${this.svgId}`).append(path);
-        path.attr("class", "js-icon").attr("d", this.getStateIconPath())
+        path.attr("class", `c_${this.useDomId}`).attr("d", this.getStateIconPath())
     }
     toggle () {
-        var path = Snap.select('.js-icon');
+        var path = Snap.select(`c_${this.useDomId}`);
         this.toNextState()
         path.animate({
             d: this.stateIconPath()
@@ -48,11 +47,9 @@ export default class SvgUtil {
     }
     toNextState () {
         this.state = this.states[this.state];
-        if (this.state === this.states.playing) {
-            this.video.pause()
-        } else {
-            this.video.play()
-        }
+        this.states.forEach( item => {
+            Object.is(this.state, item.name) && item.callBack.call(this);
+        })
     }
     getStateIconPath () {
        return this.iconEls[this.state].getAttribute('d')
@@ -69,22 +66,48 @@ function init () {
     this.replaceUseEl()
 }
 
-function getEle (tag) {
-    return document.querySelector(tag)
-}
+new SvgUtil({
+    video:video,
+    states:[
+        {
+            name:'paused',
+            callBack: function(){
+               this.video.pause()
+            }
+        },
+        {
+            name:'play',
+            callBack: function(){
+                this.video.play()
+            }
+        },
+    ],
+    svgWrapClass: '.js-button',
+    useDomId: 'play-btn-use',
+    svgId: 'svgicon',
+    snapAnimation: {
+        time: 500,
+        name: mina.linear
+    }
 
-function getAttr (name) {
-   return this.getAttribute(name)
-}
+})
 
-function $ () {
-   return {
-      arrt: function (ele){
-
-      }
-   }
-}
-
-$.prototype.attr = function () {
-    
-}
+// function getEle (tag) {
+//     return document.querySelector(tag)
+// }
+//
+// function getAttr (name) {
+//    return this.getAttribute(name)
+// }
+//
+// function $ () {
+//    return {
+//       arrt: function (ele){
+//
+//       }
+//    }
+// }
+//
+// $.prototype.attr = function () {
+//
+// }
