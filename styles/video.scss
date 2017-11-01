@@ -64,6 +64,14 @@ li{
   // background: transparent;
  // background-color: rgba(0,0,0,0.8);
    background-color: rgba(0,0,0,0);
+  .progress-visual-hover {
+    height: 16px;
+    width: 100%;
+    padding-top: 13px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
   &:hover {
     cursor: pointer;
   }

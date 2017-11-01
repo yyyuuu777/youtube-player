@@ -89,7 +89,6 @@ new SvgUtil({
         time: 500,
         name: mina.linear
     }
-
 })
 
 // function getEle (tag) {

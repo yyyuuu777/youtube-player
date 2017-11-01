@@ -169,6 +169,12 @@ li {
   width: 100%;
   transition: all 0.7s;
   background-color: transparent; }
+  .control .progress-visual-hover {
+    height: 16px;
+    width: 100%;
+    padding-top: 13px; }
+    .control .progress-visual-hover:hover {
+      cursor: pointer; }
   .control:hover {
     cursor: pointer; }
   .control:hover .progress {
