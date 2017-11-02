@@ -5,6 +5,8 @@
     <title>player</title>
     <link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.css" rel="stylesheet">
     <link rel="stylesheet" href="./styles/video.css">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <style>
     </style>
     <style type="text/css">
@@ -63,7 +65,7 @@
     <div class="video-foreground">
         <!--data-dashjs-player-->
      <div id="theater-wrap">
-    <video src="http://9890.vod.myqcloud.com/9890_9c1fa3e2aea011e59fc841df10c92278.f20.mp4"  id="video" >
+    <video  id="video" >
         <p>Your browser does not support the video tag.</p>
     </video>
          </div>
@@ -804,17 +806,6 @@
         }
     }
 
-    let video = util.getDom('video')
-    //todo:// set play speed
-    // todo:// set video lock
-    let video_obj = new Controller(video)
-    video_obj.init()
-
-    // recalculate window
-    window.addEventListener('resize', function () {
-        video_obj.recalcute_dom()
-
-    })
 
     // todo:// watch video width
 
@@ -891,30 +882,7 @@
         this.el.addEventListener("click", this.toggle.bind(this));
     }
 
-    let playButton = new SvgUtil({
-        video:video,
-        states:[
-            {
-                name:'paused',
-                callBack: function(){
-                    this.video.play()
-                }
-            },
-            {
-                name:'playing',
-                callBack: function(){
-                    this.video.pause()
-                }
-            },
-        ],
-        svgWrapClass: '.js-button',
-        useDomId: 'play-btn-use',
-        svgId: 'svgicon',
-        snapAnimation: {
-            time: 200,
-            name: mina.linear
-        }
-    })
+
 
     class VolumeSvgUtil extends  SvgUtil{
         constructor (param) {
@@ -938,34 +906,7 @@
             }, this.snapAnimation.time, this.snapAnimation.name);
         }
     }
-    let volumeButton = new VolumeSvgUtil({
-        video:video,
-        states:[
-            {
-                name:'mute',
-                callBack: function(){
-                    this.video.volume = 0
-                    video_obj.doms.ui_volume_inner.style.width = video_obj.doms.ui_volume_point.style.left = 0
-                }
-            },
-            {
-                name:'med',
-                callBack: function(){
-                    video.volume = 10 / video_obj.doms.ui_volume_out.clientWidth
-                    video_obj.doms.ui_volume_inner.style.width = video_obj.doms.ui_volume_point.style.left = '10px'
-                }
-            },
-        ],
-        svgWrapClass: '.volume',
-        useDomId: 'volume-btn-use',
-        svgId: 'svg-volume',
-        snapAnimation: {
-            time: 200,
-            name: mina.linear
-        }
-    })
-    playButton.init();
-    volumeButton.init();
+
 
 
 
@@ -1041,6 +982,99 @@
 
 </script>
 
+<script>
+
+    let videoInstance = document.querySelectorAll(['qplayer']);
+    if (videoInstance) {
+       // todo:// 执行一系列初始化函数
+    } else {
+
+    }
+
+    function useQplayer (video) {
+        // todo:// set video lock
+        let video_obj = new Controller(video)
+        video_obj.init()
+
+        // recalculate window
+        window.addEventListener('resize', function () {
+            video_obj.recalcute_dom()
+        })
+
+        let volumeButton = new VolumeSvgUtil({
+            video:video,
+            states:[
+                {
+                    name:'mute',
+                    callBack: function(){
+                        this.video.volume = 0
+                        video_obj.doms.ui_volume_inner.style.width = video_obj.doms.ui_volume_point.style.left = 0
+                    }
+                },
+                {
+                    name:'med',
+                    callBack: function(){
+                        video.volume = 10 / video_obj.doms.ui_volume_out.clientWidth
+                        video_obj.doms.ui_volume_inner.style.width = video_obj.doms.ui_volume_point.style.left = '10px'
+                    }
+                },
+            ],
+            svgWrapClass: '.volume',
+            useDomId: 'volume-btn-use',
+            svgId: 'svg-volume',
+            snapAnimation: {
+                time: 200,
+                name: mina.linear
+            }
+        })
+        let playButton = new SvgUtil({
+            video:video,
+            states:[
+                {
+                    name:'paused',
+                    callBack: function(){
+                        this.video.play()
+                    }
+                },
+                {
+                    name:'playing',
+                    callBack: function(){
+                        this.video.pause()
+                    }
+                },
+            ],
+            svgWrapClass: '.js-button',
+            useDomId: 'play-btn-use',
+            svgId: 'svgicon',
+            snapAnimation: {
+                time: 200,
+                name: mina.linear
+            }
+        })
+        playButton.init();
+        volumeButton.init();
+        window.playButton = playButton
+        window.volumeButton = volumeButton
+    }
+
+
+    // entry point
+    let QPlayer = {
+        init: function(video, src, isDash, qTheme) {
+           video.src = src
+           if (isDash) {
+               video.setAttribute('data-dashjs-player', '')
+           }
+            qTheme && useQplayer(video) || ''
+        }
+    }
+    let video = util.getDom('video')
+    // let videoUrl = "http://9890.vod.myqcloud.com/9890_9c1fa3e2aea011e59fc841df10c92278.f20.mp4"
+    let dashSrc = "https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd"
+    QPlayer.init(video, dashSrc, true, true)
+
+
+</script>
 
 </body>
 </html>
