@@ -67,7 +67,7 @@ li{
   .progress-visual-hover {
     height: 16px;
     width: 100%;
-    padding-top: 13px;
+    position: relative;
     &:hover {
       cursor: pointer;
     }
@@ -86,7 +86,7 @@ li{
   }
   .progress {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 99%;
     right: 0;

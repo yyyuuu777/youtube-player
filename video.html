@@ -68,7 +68,7 @@
     </video>
          </div>
     <section class="control" id="bottom-control">
-        <div class="progress-visual-hover">
+        <div class="progress-visual-hover" id="progress-visual-hover">
         <div class="progress" id="progress-wrap" >
             <div class="hover-wrap" id="hover-wrap"></div>
             <div class="buffered-progress" id="buffered-progress">
@@ -335,6 +335,7 @@
                 ui_play_status: util.getDom('play-status'),
                 ui_spinner: util.getDom('spinner'),
                 ui_theater_wrap: util.getDom('theater-wrap'),
+                ui_progress_visual_hover: util.getDom('progress-visual-hover'),
             }
         }
 
@@ -499,25 +500,25 @@
             })
 
             let drag = false, volume_drag = false
-            this.bind_event(this.doms.ui_progress_wrap, 'mousedown', (e) => {
+            this.bind_event(this.doms.ui_progress_visual_hover, 'mousedown', (e) => {
                 drag = true;
                 console.log('mouse donw 事件执行')
                     this.update_progress_after_drag(e.pageX);
 
             })
 
-            this.bind_event(this.doms.ui_progress_wrap, 'mousemove', (e) => {
+            this.bind_event(this.doms.ui_progress_visual_hover, 'mousemove', (e) => {
                 // let width = `${e.pageX - $('#hover-wrap').offset().left}px`
                 let width = `${e.pageX - this.getDomOffset(this.doms.ui_hover_wrap).left}px`
                 this.doms.ui_hover_wrap.style.width = width
             })
 
-            this.bind_event(this.doms.ui_progress_wrap, 'mouseover', (e) => {
+            this.bind_event(this.doms.ui_progress_visual_hover, 'mouseover', (e) => {
                 let width = `${e.pageX - this.getDomOffset(this.doms.ui_hover_wrap).left}px`
                 this.doms.ui_hover_wrap.style.width = width
             })
 
-            this.bind_event(this.doms.ui_progress_wrap, 'mouseleave', (e) => {
+            this.bind_event(this.doms.ui_progress_visual_hover, 'mouseleave', (e) => {
                 this.doms.ui_hover_wrap.style.width = 0
             })
 
