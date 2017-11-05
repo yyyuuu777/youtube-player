@@ -2,7 +2,7 @@
  * Created by ly on 10/31/2017 AD.
  */
 // import snap util
-export default class SvgUtil {
+class SvgUtil {
     constructor ({
         video,
         states,
@@ -91,22 +91,29 @@ new SvgUtil({
     }
 })
 
-// function getEle (tag) {
-//     return document.querySelector(tag)
-// }
-//
-// function getAttr (name) {
-//    return this.getAttribute(name)
-// }
-//
-// function $ () {
-//    return {
-//       arrt: function (ele){
-//
-//       }
-//    }
-// }
-//
-// $.prototype.attr = function () {
-//
-// }
+
+class VolumeSvgUtil extends  SvgUtil{
+    constructor (param) {
+        super(param)
+    }
+    goMute  () {
+        this.state = this.statesObj['med']
+        this.animate()
+    }
+    goMed () {
+        this.state = this.statesObj['mute']
+        this.animate()
+    }
+    replaceUseEl () {
+        super.replaceUseEl()
+        this.path = Snap.select(`.c_${this.useDomId}`);
+    }
+    animate () {
+        this.path.animate({
+            d: this.getStateIconPath()
+        }, this.snapAnimation.time, this.snapAnimation.name);
+    }
+}
+
+
+
