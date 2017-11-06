@@ -47,6 +47,7 @@ class SvgUtil {
         }, this.snapAnimation.time, this.snapAnimation.name);
     }
     toNextState () {
+        this.state = this.state === 'max' ? this.statesObj['mute'] : this.state
         this.state = this.statesObj[this.state];
         this.states.forEach( item => {
             Object.is(this.state, item.name) && item.callBack.call(this);
@@ -71,6 +72,8 @@ function init () {
 class VolumeSvgUtil extends  SvgUtil{
     constructor (param) {
         super(param)
+        this.statesObj['max'] = 'max'
+        this.iconEls['max'] = document.querySelector('#max')
     }
     goMute  () {
         this.state = this.statesObj['med']
@@ -78,6 +81,10 @@ class VolumeSvgUtil extends  SvgUtil{
     }
     goMed () {
         this.state = this.statesObj['mute']
+        this.animate()
+    }
+    goMax () {
+        this.state = this.statesObj['max']
         this.animate()
     }
     replaceUseEl () {

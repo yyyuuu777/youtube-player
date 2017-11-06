@@ -482,16 +482,19 @@ module.exports = class Controller {
         let volume_out_width = parseInt(this.doms.ui_volume_out.clientWidth)
         console.log(pos)
         pos = pos < 0 ? 0 : pos > volume_out_width ? volume_out_width : pos
-        this.doms.ui_volume_point.style.left =  this.doms.ui_volume_inner.style.width =  `${pos}px`
+        this.doms.ui_volume_inner.style.width =  `${pos}px`
+        this.doms.ui_volume_point.style.left = `${pos-5}px`
         //  max volume in  { 0 - 1 }
         let volume = parseInt(this.doms.ui_volume_inner.style.width) / volume_out_width
-        console.log('volume is ->', volume)
+        console.log('the volume is ->', volume)
         this.video.volume = volume
         // volume === 0 change svg
         if (volume === 0) {
             volumeButton.goMute()
-        } else {
+        }else if (volume<0.5) {
             volumeButton.goMed()
+        } else if(volume>0.5){
+            volumeButton.goMax()
         }
 
         util.log(this.doms.ui_volume_inner.style.width, this.doms.ui_volume_out.clientWidth)

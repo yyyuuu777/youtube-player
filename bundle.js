@@ -139,6 +139,7 @@ var SvgUtil = function () {
         value: function toNextState() {
             var _this = this;
 
+            this.state = this.state === 'max' ? this.statesObj['mute'] : this.state;
             this.state = this.statesObj[this.state];
             this.states.forEach(function (item) {
                 Object.is(_this.state, item.name) && item.callBack.call(_this);
@@ -174,7 +175,11 @@ var VolumeSvgUtil = function (_SvgUtil) {
     function VolumeSvgUtil(param) {
         _classCallCheck(this, VolumeSvgUtil);
 
-        return _possibleConstructorReturn(this, (VolumeSvgUtil.__proto__ || Object.getPrototypeOf(VolumeSvgUtil)).call(this, param));
+        var _this2 = _possibleConstructorReturn(this, (VolumeSvgUtil.__proto__ || Object.getPrototypeOf(VolumeSvgUtil)).call(this, param));
+
+        _this2.statesObj['max'] = 'max';
+        _this2.iconEls['max'] = document.querySelector('#max');
+        return _this2;
     }
 
     _createClass(VolumeSvgUtil, [{
@@ -187,6 +192,12 @@ var VolumeSvgUtil = function (_SvgUtil) {
         key: "goMed",
         value: function goMed() {
             this.state = this.statesObj['mute'];
+            this.animate();
+        }
+    }, {
+        key: "goMax",
+        value: function goMax() {
+            this.state = this.statesObj['max'];
             this.animate();
         }
     }, {
@@ -1601,16 +1612,19 @@ module.exports = function () {
             var volume_out_width = parseInt(this.doms.ui_volume_out.clientWidth);
             console.log(pos);
             pos = pos < 0 ? 0 : pos > volume_out_width ? volume_out_width : pos;
-            this.doms.ui_volume_point.style.left = this.doms.ui_volume_inner.style.width = pos + 'px';
+            this.doms.ui_volume_inner.style.width = pos + 'px';
+            this.doms.ui_volume_point.style.left = pos - 5 + 'px';
             //  max volume in  { 0 - 1 }
             var volume = parseInt(this.doms.ui_volume_inner.style.width) / volume_out_width;
-            console.log('volume is ->', volume);
+            console.log('the volume is ->', volume);
             this.video.volume = volume;
             // volume === 0 change svg
             if (volume === 0) {
                 volumeButton.goMute();
-            } else {
+            } else if (volume < 0.5) {
                 volumeButton.goMed();
+            } else if (volume > 0.5) {
+                volumeButton.goMax();
             }
 
             util.log(this.doms.ui_volume_inner.style.width, this.doms.ui_volume_out.clientWidth);

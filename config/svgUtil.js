@@ -95,6 +95,7 @@ new SvgUtil({
 class VolumeSvgUtil extends  SvgUtil{
     constructor (param) {
         super(param)
+        this.statesObj['max'] = 'max'
     }
     goMute  () {
         this.state = this.statesObj['med']
@@ -102,6 +103,10 @@ class VolumeSvgUtil extends  SvgUtil{
     }
     goMed () {
         this.state = this.statesObj['mute']
+        this.animate()
+    }
+    goMax () {
+        this.state = this.statesObj['max']
         this.animate()
     }
     replaceUseEl () {
