@@ -30,7 +30,6 @@ li{
   min-height: 200px;
   min-width: 200px;
   width: 80%;
-  background: #000;
   overflow: hidden;
   position: relative;
   .video-status-btn {
@@ -67,7 +66,7 @@ li{
   .progress-visual-hover {
     height: 16px;
     width: 100%;
-    position: relative;
+    position: er;
     &:hover {
       cursor: pointer;
     }
@@ -86,7 +85,7 @@ li{
   }
   .progress {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 99%;
     right: 0;
@@ -328,7 +327,10 @@ li{
   }
 
 }
-
+#fullscreen-wrap {
+  background: #000;
+  margin-bottom: -4px;
+}
 
 //refer https://codepen.io/dudleystorey/pen/PZyMrd
 // todo:// usefule ?
