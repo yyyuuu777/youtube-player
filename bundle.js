@@ -1181,9 +1181,7 @@ module.exports = function () {
 
             video_info.currentTime = this.video.currentTime;
             video_info.volume = this.video.volume;
-            if (this.video.canplay) {
-                video_info.buffered = this.video.buffered.end(0);
-            }
+            video_info.buffered = this.video.buffered.end(0);
         }
     }, {
         key: 'get_out_css',

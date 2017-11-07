@@ -93,9 +93,7 @@ module.exports = class Controller {
     sync_video_info(video_info = this.video_info) {
         video_info.currentTime = this.video.currentTime
         video_info.volume = this.video.volume
-        if (this.video.canplay) {
-            video_info.buffered = this.video.buffered.end(0)
-        }
+        video_info.buffered = this.video.buffered.end(0)
     }
 
     get_out_css (ele) {
