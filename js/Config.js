@@ -1,9 +1,9 @@
 /**
- * Created by ly on 11/3/2017 AD.
+ * include log config ..
  */
 let log_config = {
     num: 0,
-    debug: false
+    debug: true
 }
 
 export default log_config

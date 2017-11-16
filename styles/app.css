@@ -1,128 +1,3 @@
-@keyframes video_status {
-  0% {
-    opacity: 1; }
-  100% {
-    opacity: 0;
-    transform: scale(2); } }
-.ytp-spinner {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 64px;
-  margin-left: -32px;
-  z-index: 18;
-  pointer-events: none;
-  display: none; }
-
-.ytp-spinner-container {
-  pointer-events: none;
-  position: absolute;
-  width: 100%;
-  padding-bottom: 100%;
-  top: 50%;
-  left: 50%;
-  margin-top: -50%;
-  margin-left: -50%;
-  animation: ytp-spinner-linspin 1568.23529647ms linear infinite;
-  -webkit-animation: ytp-spinner-linspin 1568.23529647ms linear infinite; }
-
-.ytp-spinner-left {
-  right: 49%; }
-
-.ytp-spinner-left {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  overflow: hidden; }
-
-.ytp-spinner-right {
-  left: 49%; }
-
-.ytp-spinner-right {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden; }
-
-.ytp-spinner-right .ytp-spinner-circle {
-  left: -100%;
-  border-left-color: transparent;
-  -webkit-animation: ytp-right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: ytp-right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both; }
-
-.ytp-spinner-left .ytp-spinner-circle {
-  border-right-color: transparent;
-  -webkit-animation: ytp-spinner-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: ytp-spinner-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both; }
-
-.ytp-spinner-circle {
-  box-sizing: border-box;
-  position: absolute;
-  width: 200%;
-  height: 100%;
-  border-style: solid;
-  border-color: #ddd #ddd transparent;
-  border-radius: 50%;
-  border-width: 6px; }
-
-.ytp-spinner {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 64px;
-  margin-left: -32px;
-  z-index: 18;
-  pointer-events: none; }
-
-@keyframes ytp-right-spin {
-  0% {
-    transform: rotate(-130deg); }
-  50% {
-    transform: rotate(5deg); }
-  100% {
-    transform: rotate(-130deg); } }
-@keyframes ytp-spinner-easespin {
-  12.5% {
-    transform: rotate(135deg); }
-  25% {
-    transform: rotate(270deg); }
-  37.5% {
-    transform: rotate(405deg); }
-  50% {
-    transform: rotate(540deg); }
-  62.5% {
-    transform: rotate(675deg); }
-  75% {
-    transform: rotate(810deg); }
-  87.5% {
-    transform: rotate(945deg); }
-  100% {
-    transform: rotate(1080deg); } }
-@keyframes ytp-spinner-left-spin {
-  0% {
-    transform: rotate(130deg); }
-  50% {
-    transform: rotate(-5deg); }
-  100% {
-    transform: rotate(130deg); } }
-.ytp-spinner-rotator {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-animation: ytp-spinner-easespin 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: ytp-spinner-easespin 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both; }
-
-@keyframes ytp-spinner-linspin {
-  100% {
-    transform: rotate(360deg); } }
-@keyframes video_status {
-  0% {
-    opacity: 1; }
-  100% {
-    opacity: 0;
-    transform: scale(2); } }
 .ytp-spinner {
   position: absolute;
   left: 50%;
@@ -257,7 +132,7 @@ li {
 
 .video {
   min-height: 200px;
-  min-width: 200px;
+  min-width: 600px;
   width: 80%;
   overflow: hidden;
   position: relative; }
@@ -276,7 +151,8 @@ li {
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0.5); }
     .video .video-status-btn svg {
-      display: none; }
+      display: none;
+      fill: #fff; }
   .video video {
     width: 100%; }
 
@@ -286,15 +162,13 @@ li {
   z-index: 1000;
   width: 100%;
   transition: all 0.7s;
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
   .control .progress-visual-hover {
     height: 16px;
     width: 100%;
-    position: er; }
+    position: relative; }
     .control .progress-visual-hover:hover {
       cursor: pointer; }
-  .control:hover {
-    cursor: pointer; }
   .control:hover .progress {
     transform: scaleY(1.5);
     box-sizing: border-box; }
@@ -303,7 +177,7 @@ li {
     transform: scaleY(0.67); }
   .control .progress {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 99%;
     right: 0;
@@ -317,7 +191,7 @@ li {
       left: 0;
       background-color: rgba(255, 255, 255, 0.5); }
     .control .progress .buffered-progress {
-      background: gray;
+      background: rgba(255, 255, 255, 0.4);
       width: 0;
       height: 100%; }
       .control .progress .buffered-progress .inner {
@@ -371,10 +245,14 @@ li {
         transform: scale(0.7);
         border-radius: 2px;
         background-color: #f00; }
+    .control .btns ul li svg:hover, .control .btns ul li .volume-out:hover {
+      cursor: pointer; }
+    .control .btns ul li svg {
+      fill: #fff; }
     .control .btns ul li span {
       font-size: 12px;
       color: #fff;
-      line-height: 40px;
+      line-height: 44px;
       font-weight: normal; }
     .control .btns ul li .player-btn, .control .btns ul li .volume-btn {
       height: 100%;
@@ -382,31 +260,37 @@ li {
       margin-right: 3px; }
       .control .btns ul li .player-btn button, .control .btns ul li .volume-btn button {
         height: 100%; }
-      .control .btns ul li .player-btn svg, .control .btns ul li .volume-btn svg {
-        fill: #fff; }
     .control .btns ul li .setting-btn, .control .btns ul li .movie-btn, .control .btns ul li .fullscreen, .control .btns ul li .next-btn {
       height: 100%;
-      width: 36px;
+      width: 40px;
       transition: transform .5s; }
-      .control .btns ul li .setting-btn svg, .control .btns ul li .movie-btn svg, .control .btns ul li .fullscreen svg, .control .btns ul li .next-btn svg {
-        fill: #fff; }
+    .control .btns ul li .volume-btn, .control .btns ul li .next-btn {
+      width: 40px; }
     .control .btns ul li .fullscreen:hover {
       transform: scale(1.1); }
+    .control .btns ul li .movie-btn {
+      width: 36px; }
     .control .btns ul li .setting-menu {
       display: none;
       position: absolute;
-      bottom: 50px;
+      bottom: 60px;
       right: -40px;
-      width: 189px;
+      width: 208px;
       height: auto;
       transition: all .5s;
-      border-radius: 3px;
+      border-radius: 2px;
       background-color: rgba(28, 28, 28, 0.9); }
       .control .btns ul li .setting-menu > div {
         display: flex;
-        padding: 10px;
-        height: 33px;
-        font-size: 14px; }
+        font-size: 14px;
+        padding: 15px 30px;
+        position: relative; }
+        .control .btns ul li .setting-menu > div svg {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 10px;
+          margin: auto; }
         .control .btns ul li .setting-menu > div:hover {
           background-color: rgba(255, 255, 255, 0.1);
           cursor: pointer; }
@@ -428,16 +312,23 @@ li {
       height: 290px;
       border-radius: 3px;
       background-color: rgba(28, 28, 28, 0.9);
-      bottom: 50px; }
+      bottom: 65px; }
       .control .btns ul li .speed-menu p {
         height: 33px;
         text-align: center;
         color: #fff;
         line-height: 33px;
-        font-size: 12px; }
+        font-size: 12px;
+        position: relative; }
         .control .btns ul li .speed-menu p:hover {
           background-color: rgba(255, 255, 255, 0.1);
           cursor: pointer; }
+        .control .btns ul li .speed-menu p svg {
+          position: absolute;
+          left: 10px;
+          top: 0;
+          bottom: 0;
+          margin: auto; }
       .control .btns ul li .speed-menu > p:nth-of-type(1) {
         border-bottom: 0.5px solid #eeeeee;
         height: 46px;
@@ -445,7 +336,7 @@ li {
     .control .btns ul .volume-control {
       height: 100%;
       width: 0;
-      padding-top: 18px;
+      padding-top: 20px;
       margin-right: 10px;
       transition: all 1s;
       opacity: 0; }
@@ -503,5 +394,15 @@ li {
 #fullscreen-wrap {
   background: #000;
   margin-bottom: -4px; }
+
+/**
+ * video center toggle play status, animation
+ */
+@keyframes video_status {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0;
+    transform: scale(2); } }
 
 /*# sourceMappingURL=app.css.map */

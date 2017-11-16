@@ -58,7 +58,6 @@ module.exports = class Controller {
         }
     }
 
-    // entry method
     init() {
         this.listen()
         this.proxy_video_info = this.proxy_render_to_view()
@@ -84,7 +83,6 @@ module.exports = class Controller {
     }
 
     init_volume () {
-        // todo :// this 50 have issue
         let ui_volume_width = parseInt(this.get_out_css(this.doms.ui_volume_out)['width']) || 50
         this.video.volume = 10 / ui_volume_width
         this.doms.ui_volume_inner.style.width = this.doms.ui_volume_point.style.left = '10px'
@@ -112,9 +110,8 @@ module.exports = class Controller {
             util.log('video-canplay-now')
         })
 
-
         this.video.addEventListener(this.listen_type.waiting, () => {
-            console.log('--------video is loading------')
+            util.log('--------video is loading------')
             this.in_loading()
         })
 
@@ -153,14 +150,12 @@ module.exports = class Controller {
 
     // The video attribute is delegated to the following method, bind data - view
     proxy_render_to_view() {
-
         let progress_wrap_width = this.doms.ui_progress_wrap.clientWidth
         util.log(`get progress wrap width is ----> ${progress_wrap_width}`)
         return new Proxy(this.video_info, {
             set: (target, key, value, receiver) => {
                 util.log(`ui ----> setting ---> ${key}`)
                 if (Object.is('currentTime', key)) {
-                    // 这里可以使用函数式编程, 进度宽度 = 进度宽度/总进度  * 当前事件/总时间
                     this.doms.ui_progress.style.width = this.doms.ui_progress_point.style.left = `${this.cal_current_progress_buffered_width(value, this.video_info.duration, progress_wrap_width)()}px`
                     this.doms.ui_buffered.style.width = `${this.cal_current_progress_buffered_width(this.video_info.buffered, this.video_info.duration, progress_wrap_width)()}px`
                     this.doms.ui_video_current_time.innerHTML = this.format_duration(value.toFixed(0))
@@ -186,7 +181,7 @@ module.exports = class Controller {
     }
 
     format_duration (duration) {
-        let sec_num = parseInt(duration, 10); // don't forget the second param
+        let sec_num = parseInt(duration, 10);
         let hours   = Math.floor(sec_num / 3600);
         let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
         let seconds = sec_num - (hours * 3600) - (minutes * 60);
@@ -221,7 +216,7 @@ module.exports = class Controller {
         let drag = false, volume_drag = false
         this.bind_event(this.doms.ui_progress_visual_hover, 'mousedown', (e) => {
             drag = true;
-            console.log('mouse donw 事件执行')
+            util.log('mouse donw 事件执行')
             this.update_progress_after_drag(e.pageX);
 
         })
@@ -251,7 +246,7 @@ module.exports = class Controller {
             if(drag) {
                 drag = false;
                 this.update_progress_after_drag(e.pageX);
-                util.log('mouse up 事件执行')
+                util.log('mouse up event has executed')
             } else if (volume_drag) {
                 // update volume
                 volume_drag = false
@@ -260,7 +255,7 @@ module.exports = class Controller {
         })
 
         document.addEventListener('mousemove', (e) => {
-            util.log('mousemove 事件执行')
+            util.log('mousemove event has executed')
             if(drag) {
                 this.update_progress_after_drag(e.pageX);
             } else if (volume_drag) {
@@ -289,7 +284,7 @@ module.exports = class Controller {
         this.doms.ui_speed_array.forEach( item => {
             this.bind_event(item, 'click', e => {
                 let speed = e.currentTarget.innerHTML
-                speed = this.equal('normal', speed) ? 1 : speed
+                speed = this.equal('Normal', speed) ? 1 : speed
                 if (Number.isInteger(parseInt(speed))) {
                     this.doms.ui_speed_tag.innerHTML = this.video.playbackRate = speed === 1 ? 1.0 : speed
                     this.hide_speed_menu()
@@ -349,7 +344,7 @@ module.exports = class Controller {
 
         document.addEventListener('keydown', e => {
             let key = e.keyCode
-            console.log(key)
+            util.log(key)
             if (key == this.keyboard.space) {
                 playButton.toggle()
                 e.preventDefault()
@@ -388,12 +383,12 @@ module.exports = class Controller {
         if (this.doms.ui_video_wrap.style.width === '100%'){
             this.doms.ui_video_wrap.style.width = '70%'
             this.doms.ui_theater_wrap.style.width = '100%'
-            this.doms.ui_theater_btn.style.transform = 'scale(0.8)'
+            this.doms.ui_theater_btn.style.transform = 'scale(1)'
         } else {
             this.doms.ui_video_wrap.style.width = '100%'
             this.doms.ui_theater_wrap.style.width = '90%'
             this.doms.ui_theater_wrap.style.margin = 'auto'
-            this.doms.ui_theater_btn.style.transform = 'scale(1)'
+            this.doms.ui_theater_btn.style.transform = 'scale(0.8)'
         }
 
     }
@@ -459,18 +454,13 @@ module.exports = class Controller {
         // let position = x - $('#progress-point').offset().left
         // let position = x - $('#progress-point').offset().left
         let position = x - this.getDomOffset(this.doms.ui_progress_point).left
-        // console.log(position, position1)
+        // util.log(position, position1)
         // set progress postion
         let progress_wrap_width = parseInt(this.doms.ui_progress_wrap.clientWidth)
         let pos = position + parseInt(this.doms.ui_progress.style.width)
         pos = pos < 0 ? 0 : pos > progress_wrap_width ? progress_wrap_width : pos
         this.doms.ui_progress_point.style.left = this.doms.ui_progress.style.width = `${pos}px`
-        // todo:// 此时 wrap width 为 null? !!!! witdth 与 client width 耗时并不是没有理由的 你对 config 原生 dom 这些属性 不熟悉！
-        // todo:// 这里用  .style.width ?
-
         this.video.currentTime = parseInt(this.doms.ui_progress.style.width) / progress_wrap_width * this.video_info.duration
-        // todo:// this.doms.ui_video_current_time =
-
     }
 
     update_volume_drag (x) {
@@ -478,13 +468,13 @@ module.exports = class Controller {
         let position = x - this.getDomOffset(this.doms.ui_volume_point).left
         let pos = position + parseInt(this.doms.ui_volume_inner.clientWidth)
         let volume_out_width = parseInt(this.doms.ui_volume_out.clientWidth)
-        console.log(pos)
+        util.log(pos)
         pos = pos < 0 ? 0 : pos > volume_out_width ? volume_out_width : pos
         this.doms.ui_volume_inner.style.width =  `${pos}px`
         this.doms.ui_volume_point.style.left = `${pos-5}px`
         //  max volume in  { 0 - 1 }
         let volume = parseInt(this.doms.ui_volume_inner.style.width) / volume_out_width
-        console.log('the volume is ->', volume)
+        util.log('the volume is ->', volume)
         this.video.volume = volume
         // volume === 0 change svg
         if (volume === 0) {

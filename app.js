@@ -1,9 +1,7 @@
 /**
  * Created by ly on 11/2/2017 AD.
  */
-// todo:// css 打包和js 在一块  怎么导入js 和 css
-// todo:// babel-core 作用
-// todo:// es2015  ? npm install babel-preset-es2015 --save -dev 或 建立文件夹？
+require('./svg/svg')
 require('./styles/app.scss')
 let Util = require('./js/Util')
 let Svg = require('./js/Svg')
@@ -30,7 +28,6 @@ function useQplayer (video) {
     window.addEventListener('resize', function () {
         video_obj.recalcute_dom()
     })
-
 
     let volumeButton = new VolumeSvgUtil({
         video:video,

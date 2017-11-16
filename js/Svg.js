@@ -10,7 +10,6 @@ class SvgUtil {
         svgId,
         snapAnimation,
     }) {
-        // 用一个对象接收岂不更好 如 this.a = {}
         this.video = video
         this.states = states
         this.svgWrapClass = svgWrapClass
