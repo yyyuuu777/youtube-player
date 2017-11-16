@@ -1,222 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>player</title>
-    <link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.css" rel="stylesheet">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <style>
-    </style>
-    <link rel="stylesheet" href="./style.css">
-    <style type="text/css">
-        .icon {
-            width: 15px; height: 15px;
-            vertical-align: -0.27em;
-            fill: #fff;
-            overflow: hidden;
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js "></script>
+  <meta charset="UTF-8">
+  <title>player</title>
+  <link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.css" rel="stylesheet">
+  <meta name="viewport"
+  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <style>
+  </style>
+  <link rel="stylesheet" href="./style.css">
+  <style type="text/css">
+    .icon {
+      width: 15px; height: 15px;
+      vertical-align: -0.27em;
+      fill: #fff;
+      overflow: hidden;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js "></script>
 </head>
 <body>
-<!--svg test -->
-<div class="video" id="video-wrap">
+  <!--svg test -->
+  <div class="video" id="video-wrap">
     <!--video-background-->
     <div class="" id="fullscreen-wrap">
-        <div class="ytp-spinner" data-layer="4" style="" id="spinner">
-            <div><div class="ytp-spinner-container">
-                <div class="ytp-spinner-rotator">
-                    <div class="ytp-spinner-left">
-                        <div class="ytp-spinner-circle">
+      <div class="ytp-spinner" data-layer="4" style="" id="spinner">
+        <div><div class="ytp-spinner-container">
+          <div class="ytp-spinner-rotator">
+            <div class="ytp-spinner-left">
+              <div class="ytp-spinner-circle">
 
-                        </div>
-                    </div>
-                    <div class="ytp-spinner-right">
-                        <div class="ytp-spinner-circle">
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
+            <div class="ytp-spinner-right">
+              <div class="ytp-spinner-circle">
+              </div>
             </div>
-            <div class="ytp-spinner-message" style="display: none;">If playback doesn't begin shortly, try restarting your device.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ytp-spinner-message" style="display: none;">If playback doesn't begin shortly, try restarting your device.</div></div>
 
-        <section class="video-status-btn" id="video-status-btn">
+      <section class="video-status-btn" id="video-status-btn">
 
-            <svg width="100%" height="100%" viewBox="0 0 36 36"  id="play-status">
-                <path id="pause-icon" data-state="playing"
-                      d="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26"/>
-            </svg>
+        <svg width="100%" height="100%" viewBox="0 0 36 36"  id="play-status">
+          <path id="pause-icon" data-state="playing"
+          d="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26"/>
+        </svg>
 
-            <svg width="100%" height="100%" viewBox="0 0 36 36"  id="pause-status">
-                <path id="play-icon" data-state="paused"
-                      d="M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28"/>
-            </svg>
+        <svg width="100%" height="100%" viewBox="0 0 36 36"  id="pause-status">
+          <path id="play-icon" data-state="paused"
+          d="M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28"/>
+        </svg>
 
-        </section>
-    <div class="video-foreground">
+      </section>
+      <div class="video-foreground">
         <!--data-dashjs-player-->
-     <div id="theater-wrap">
-    <video  id="video" >
-        <p>Your browser does not support the video tag.</p>
-    </video>
-         </div>
-    <section class="control" id="bottom-control">
-        <div class="progress-visual-hover" id="progress-visual-hover">
-        <div class="progress" id="progress-wrap" >
-            <div class="hover-wrap" id="hover-wrap"></div>
-            <div class="buffered-progress" id="buffered-progress">
+        <div id="theater-wrap">
+          <video  id="video" >
+            <p>Your browser does not support the video tag.</p>
+          </video>
+        </div>
+        <section class="control" id="bottom-control">
+          <div class="progress-visual-hover" id="progress-visual-hover">
+            <div class="progress" id="progress-wrap" >
+              <div class="hover-wrap" id="hover-wrap"></div>
+              <div class="buffered-progress" id="buffered-progress">
                 <div class="inner" id="video-progress-inner">
-                    <div class="point" id="progress-point" ></div>
+                  <div class="point" id="progress-point" ></div>
                 </div>
+              </div>
             </div>
-        </div>
-        </div>
-        <div class="btns">
+          </div>
+          <div class="btns">
             <ul>
-                <!--player button-->
-                <div class="control-left" id="control-left">
-                    <li>
-                        <div class="player-btn">
-                            <button class="button js-button">
-                                <svg width="100%" height="100%" viewBox="0 0 36 36" id="svgicon">
-                                    <defs>
-                                        <path id="paused" data-state="playing"
-                                              d="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26"/>
-                                        <path id="playing" data-state="paused"
-                                              d="M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28"/>
-                                    </defs>
-                                    <use id="play-btn-use" xlink:href="#paused"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </li>
-                    <li>
-
-                        <button class="next-btn">
-                            <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
-                                <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                     xlink:href="#ytp-id-12"></use>
-                                <path class="ytp-svg-fill" d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"
-                                      id="ytp-id-12"></path>
-                            </svg>
-                        </button>
-
-                    </li>
-                    <li>
-                        <div class="volume-btn" id="volume-btn">
-                            <button class="volume">
-                                <svg width="100%" height="100%" id="svg-volume" viewBox="0 0 36 36">
-                                    <defs>
-                                        <path class="ytp-svg-fill" id="mute" data-state="med" d="m 21.48,17.98 c 0,-1.77 -1.02,-3.29 -2.5,-4.03 v 2.21 l 2.45,2.45 c .03,-0.2 .05,-0.41 .05,-0.63 z m 2.5,0 c 0,.94 -0.2,1.82 -0.54,2.64 l 1.51,1.51 c .66,-1.24 1.03,-2.65 1.03,-4.15 0,-4.28 -2.99,-7.86 -7,-8.76 v 2.05 c 2.89,.86 5,3.54 5,6.71 z M 9.25,8.98 l -1.27,1.26 4.72,4.73 H 7.98 v 6 H 11.98 l 5,5 v -6.73 l 4.25,4.25 c -0.67,.52 -1.42,.93 -2.25,1.18 v 2.06 c 1.38,-0.31 2.63,-0.95 3.69,-1.81 l 2.04,2.05 1.27,-1.27 -9,-9 -7.72,-7.72 z m 7.72,.99 -2.09,2.08 2.09,2.09 V 9.98 z" id="ytp-id-122"></path>
-                                        <path class="ytp-svg-fill ytp-svg-volume-animation-speaker" id="med" data-state="mute" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 Z" fill="#fff" ></path>
-                                        <path class="ytp-svg-fill ytp-svg-volume-animation-speaker" data-state="max" id="max" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z" fill="#fff"></path>
-                                    </defs>
-                                    <use xlink:href="#mute" id="volume-btn-use"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </li>
-                    <li class="volume-control" id="volume-control">
-                       <div class="volume-out" id="volume-out">
-                           <div class="volume-inner" id="volume-inner">
-                               <div class="volume-point" id="volume-point"></div>
-                           </div>
-                       </div>
-                    </li>
-                    <li class="video-time">
-                        <span id="video-current-time">0:20</span>
-                        <span>/</span>
-                        <span id="video-duration"></span>
-                    </li>
-                </div>
-                <li class="setting-wrap">
-                    <p class="speed-tag" id="speed-tag">1.0</p>
-                    <button class="setting-btn" id="setting-btn" data-state="close">
-                        <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
-                            <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="#ytp-id-18"></use>
-                            <path d="m 23.94,18.78 c .03,-0.25 .05,-0.51 .05,-0.78 0,-0.27 -0.02,-0.52 -0.05,-0.78 l 1.68,-1.32 c .15,-0.12 .19,-0.33 .09,-0.51 l -1.6,-2.76 c -0.09,-0.17 -0.31,-0.24 -0.48,-0.17 l -1.99,.8 c -0.41,-0.32 -0.86,-0.58 -1.35,-0.78 l -0.30,-2.12 c -0.02,-0.19 -0.19,-0.33 -0.39,-0.33 l -3.2,0 c -0.2,0 -0.36,.14 -0.39,.33 l -0.30,2.12 c -0.48,.2 -0.93,.47 -1.35,.78 l -1.99,-0.8 c -0.18,-0.07 -0.39,0 -0.48,.17 l -1.6,2.76 c -0.10,.17 -0.05,.39 .09,.51 l 1.68,1.32 c -0.03,.25 -0.05,.52 -0.05,.78 0,.26 .02,.52 .05,.78 l -1.68,1.32 c -0.15,.12 -0.19,.33 -0.09,.51 l 1.6,2.76 c .09,.17 .31,.24 .48,.17 l 1.99,-0.8 c .41,.32 .86,.58 1.35,.78 l .30,2.12 c .02,.19 .19,.33 .39,.33 l 3.2,0 c .2,0 .36,-0.14 .39,-0.33 l .30,-2.12 c .48,-0.2 .93,-0.47 1.35,-0.78 l 1.99,.8 c .18,.07 .39,0 .48,-0.17 l 1.6,-2.76 c .09,-0.17 .05,-0.39 -0.09,-0.51 l -1.68,-1.32 0,0 z m -5.94,2.01 c -1.54,0 -2.8,-1.25 -2.8,-2.8 0,-1.54 1.25,-2.8 2.8,-2.8 1.54,0 2.8,1.25 2.8,2.8 0,1.54 -1.25,2.8 -2.8,2.8 l 0,0 z"
-                                   id="ytp-id-18"></path>
-                        </svg>
+              <!--player button-->
+              <div class="control-left" id="control-left">
+                <li>
+                  <div class="player-btn">
+                    <button class="button js-button">
+                      <svg width="100%" height="100%" viewBox="0 0 36 36" id="svgicon">
+                        <defs>
+                          <path id="paused" data-state="playing"
+                          d="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26"/>
+                          <path id="playing" data-state="paused"
+                          d="M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28"/>
+                        </defs>
+                        <use id="play-btn-use" xlink:href="#paused"/>
+                      </svg>
                     </button>
-                    <div class="menu">
-                        <section class="setting-menu" id="setting-menu">
-                            <div id="speed-parent-menu">
-                                <p> Speed </p>
-                                <p> Normal </p>
-                                <svg class="icon" aria-hidden="true">
-                                    <use xlink:href="#icon-fanhui-copy1"></use>
-                                </svg>
-                            </div>
-                        </section>
+                  </div>
+                </li>
+                <li>
 
-                        <section class="speed-menu" id="speed-menu">
-                            <p id="back-setting-parent">
-                                <svg class="icon" aria-hidden="true">
-                                    <use xlink:href="#icon-fanhui-copy"></use>
-                                </svg>
-                                Speed</p>
-                            <p class="speed-value"> 0.25 </p>
-                            <p class="speed-value"> 0.5  </p>
-                            <p class="speed-value"> 0.75 </p>
-                            <p class="speed-value"> Normal </p>
-                            <p class="speed-value"> 1.25 </p>
-                            <p class="speed-value"> 1.5 </p>
-                            <p class="speed-value"> 1.75 </p>
-                        </section>
+                  <button class="next-btn">
+                    <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
+                      <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="#ytp-id-12"></use>
+                      <path class="ytp-svg-fill" d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"
+                      id="ytp-id-12"></path>
+                    </svg>
+                  </button>
 
+                </li>
+                <li>
+                  <div class="volume-btn" id="volume-btn">
+                    <button class="volume">
+                      <svg width="100%" height="100%" id="svg-volume" viewBox="0 0 36 36">
+                        <defs>
+                          <path class="ytp-svg-fill" id="mute" data-state="med" d="m 21.48,17.98 c 0,-1.77 -1.02,-3.29 -2.5,-4.03 v 2.21 l 2.45,2.45 c .03,-0.2 .05,-0.41 .05,-0.63 z m 2.5,0 c 0,.94 -0.2,1.82 -0.54,2.64 l 1.51,1.51 c .66,-1.24 1.03,-2.65 1.03,-4.15 0,-4.28 -2.99,-7.86 -7,-8.76 v 2.05 c 2.89,.86 5,3.54 5,6.71 z M 9.25,8.98 l -1.27,1.26 4.72,4.73 H 7.98 v 6 H 11.98 l 5,5 v -6.73 l 4.25,4.25 c -0.67,.52 -1.42,.93 -2.25,1.18 v 2.06 c 1.38,-0.31 2.63,-0.95 3.69,-1.81 l 2.04,2.05 1.27,-1.27 -9,-9 -7.72,-7.72 z m 7.72,.99 -2.09,2.08 2.09,2.09 V 9.98 z" id="ytp-id-122"></path>
+                          <path class="ytp-svg-fill ytp-svg-volume-animation-speaker" id="med" data-state="mute" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 Z" fill="#fff" ></path>
+                          <path class="ytp-svg-fill ytp-svg-volume-animation-speaker" data-state="max" id="max" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z" fill="#fff"></path>
+                        </defs>
+                        <use xlink:href="#mute" id="volume-btn-use"/>
+                      </svg>
+                    </button>
+                  </div>
+                </li>
+                <li class="volume-control" id="volume-control">
+                  <div class="volume-out" id="volume-out">
+                    <div class="volume-inner" id="volume-inner">
+                      <div class="volume-point" id="volume-point"></div>
                     </div>
+                  </div>
+                </li>
+                <li class="video-time">
+                  <span id="video-current-time">0:20</span>
+                  <span>/</span>
+                  <span id="video-duration"></span>
+                </li>
+              </div>
+              <li class="setting-wrap">
+                <p class="speed-tag" id="speed-tag">1.0</p>
+                <button class="setting-btn" id="setting-btn" data-state="close">
+                  <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
+                    <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="#ytp-id-18"></use>
+                    <path d="m 23.94,18.78 c .03,-0.25 .05,-0.51 .05,-0.78 0,-0.27 -0.02,-0.52 -0.05,-0.78 l 1.68,-1.32 c .15,-0.12 .19,-0.33 .09,-0.51 l -1.6,-2.76 c -0.09,-0.17 -0.31,-0.24 -0.48,-0.17 l -1.99,.8 c -0.41,-0.32 -0.86,-0.58 -1.35,-0.78 l -0.30,-2.12 c -0.02,-0.19 -0.19,-0.33 -0.39,-0.33 l -3.2,0 c -0.2,0 -0.36,.14 -0.39,.33 l -0.30,2.12 c -0.48,.2 -0.93,.47 -1.35,.78 l -1.99,-0.8 c -0.18,-0.07 -0.39,0 -0.48,.17 l -1.6,2.76 c -0.10,.17 -0.05,.39 .09,.51 l 1.68,1.32 c -0.03,.25 -0.05,.52 -0.05,.78 0,.26 .02,.52 .05,.78 l -1.68,1.32 c -0.15,.12 -0.19,.33 -0.09,.51 l 1.6,2.76 c .09,.17 .31,.24 .48,.17 l 1.99,-0.8 c .41,.32 .86,.58 1.35,.78 l .30,2.12 c .02,.19 .19,.33 .39,.33 l 3.2,0 c .2,0 .36,-0.14 .39,-0.33 l .30,-2.12 c .48,-0.2 .93,-0.47 1.35,-0.78 l 1.99,.8 c .18,.07 .39,0 .48,-0.17 l 1.6,-2.76 c .09,-0.17 .05,-0.39 -0.09,-0.51 l -1.68,-1.32 0,0 z m -5.94,2.01 c -1.54,0 -2.8,-1.25 -2.8,-2.8 0,-1.54 1.25,-2.8 2.8,-2.8 1.54,0 2.8,1.25 2.8,2.8 0,1.54 -1.25,2.8 -2.8,2.8 l 0,0 z"
+                    id="ytp-id-18"></path>
+                  </svg>
+                </button>
+                <div class="menu">
+                  <section class="setting-menu" id="setting-menu">
+                    <div id="speed-parent-menu">
+                      <p> Speed </p>
+                      <p> Normal </p>
+                      <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-fanhui-copy1"></use>
+                      </svg>
+                    </div>
+                  </section>
+
+                  <section class="speed-menu" id="speed-menu">
+                    <p id="back-setting-parent">
+                      <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-fanhui-copy"></use>
+                      </svg>
+                      Speed</p>
+                      <p class="speed-value"> 0.25 </p>
+                      <p class="speed-value"> 0.5  </p>
+                      <p class="speed-value"> 0.75 </p>
+                      <p class="speed-value"> Normal </p>
+                      <p class="speed-value"> 1.25 </p>
+                      <p class="speed-value"> 1.5 </p>
+                      <p class="speed-value"> 1.75 </p>
+                    </section>
+
+                  </div>
 
                 </li>
                 <li>
-                    <button class="movie-btn" id="theater-btn">
-                        <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
-                            <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="#ytp-id-28"></use>
-                            <path d="m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z"
-                                  fill-rule="evenodd" id="ytp-id-28"></path>
-                        </svg>
-                    </button>
+                  <button class="movie-btn" id="theater-btn">
+                    <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
+                      <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="#ytp-id-28"></use>
+                      <path d="m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z"
+                      fill-rule="evenodd" id="ytp-id-28"></path>
+                    </svg>
+                  </button>
 
                 </li>
                 <li>
-                    <button class="fullscreen" id="full-screen">
-                        <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%" >
-                            <g class="ytp-fullscreen-button-corner-0">
-                                <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                     xlink:href="#ytp-id-77"></use>
-                                <path class="ytp-svg-fill" d="m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z"
-                                      id="ytp-id-77"></path>
-                            </g>
-                            <g class="ytp-fullscreen-button-corner-1">
-                                <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                     xlink:href="#ytp-id-78"></use>
-                                <path class="ytp-svg-fill" d="m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z"
-                                      id="ytp-id-78"></path>
-                            </g>
-                            <g class="ytp-fullscreen-button-corner-2">
-                                <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                     xlink:href="#ytp-id-79"></use>
-                                <path class="ytp-svg-fill" d="m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z"
-                                      id="ytp-id-79"></path>
-                            </g>
-                            <g class="ytp-fullscreen-button-corner-3">
-                                <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                     xlink:href="#ytp-id-80"></use>
-                                <path class="ytp-svg-fill" d="M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z"
-                                      id="ytp-id-80"></path>
-                            </g>
-                        </svg>
-                    </button>
+                  <button class="fullscreen" id="full-screen">
+                    <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%" >
+                      <g class="ytp-fullscreen-button-corner-0">
+                        <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href="#ytp-id-77"></use>
+                        <path class="ytp-svg-fill" d="m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z"
+                        id="ytp-id-77"></path>
+                      </g>
+                      <g class="ytp-fullscreen-button-corner-1">
+                        <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href="#ytp-id-78"></use>
+                        <path class="ytp-svg-fill" d="m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z"
+                        id="ytp-id-78"></path>
+                      </g>
+                      <g class="ytp-fullscreen-button-corner-2">
+                        <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href="#ytp-id-79"></use>
+                        <path class="ytp-svg-fill" d="m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z"
+                        id="ytp-id-79"></path>
+                      </g>
+                      <g class="ytp-fullscreen-button-corner-3">
+                        <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href="#ytp-id-80"></use>
+                        <path class="ytp-svg-fill" d="M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z"
+                        id="ytp-id-80"></path>
+                      </g>
+                    </svg>
+                  </button>
                 </li>
-            </ul>
+              </ul>
+            </div>
+          </section>
         </div>
-    </section>
+      </div>
     </div>
-    </div>
-</div>
-</section>
+  </section>
 <script src="./common.js"></script>
 <script src="./main.js"></script>
 <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>

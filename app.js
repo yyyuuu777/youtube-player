@@ -1,6 +1,3 @@
-/**
- * Created by ly on 11/2/2017 AD.
- */
 require('./svg/svg')
 require('./styles/app.scss')
 let Util = require('./js/Util')
