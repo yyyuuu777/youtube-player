@@ -5,10 +5,10 @@ var path = require('path')
 module.exports = merge(common, {
   devtool: 'source-map',
   entry: [
-    './app.js'
+    './index.js'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, '../dist'),
     filename: "[name].js"
   },
   plugins: [

@@ -1,7 +1,7 @@
 /**
  * Created by ly on 11/2/2017 AD.
  */
-import  log_config from './Config'
+import  log_config from './config'
 module.exports = class Util {
     getDom(id) {
         if(id.includes('.')) {

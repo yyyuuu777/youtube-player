@@ -1,6 +1,4 @@
-/** * Created by ly on 11/2/2017 AD. */
-
-let Util = require('./Util')
+let Util = require('./util')
 let util = new Util()
 module.exports = class Controller {
 

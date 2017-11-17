@@ -1,6 +1,3 @@
-/**
- * Created by ly on 10/31/2017 AD.
- */
 // import snap util
 class SvgUtil {
     constructor ({

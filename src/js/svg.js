@@ -1,6 +1,3 @@
-/**
- * Created by ly on 11/2/2017 AD.
- */
 class SvgUtil {
     constructor ({
         video,

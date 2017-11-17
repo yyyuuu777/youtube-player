@@ -1,10 +1,11 @@
-require('./svg/svg')
-require('./styles/app.scss')
-let Util = require('./js/Util')
-let Svg = require('./js/Svg')
-let VolumeSvgUtil = require('./js/Svg').svg.volumeSvgUtil
-let SvgUtil = require('./js/Svg').svg.svgUtil
-let Controller = require('./js/Control')
+exports = module.exports = {}
+require('./svgicon/svg')
+require('../styles/app.scss')
+let Util = require('./util')
+let Svg = require('./svg')
+let VolumeSvgUtil = require('./svg').svg.volumeSvgUtil
+let SvgUtil = require('./svg').svg.svgUtil
+let Controller = require('./control')
 let util = new Util()
 
 let QPlayer = {
@@ -81,7 +82,7 @@ function useQplayer (video) {
     window.playButton = playButton
     window.volumeButton = volumeButton
 }
-let video = util.getDom('video')
-// let videoUrl = "http://9890.vod.myqcloud.com/9890_9c1fa3e2aea011e59fc841df10c92278.f20.mp4"
-let dashSrc = "https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd"
-QPlayer.init(video, dashSrc, true, true)
+
+exports.Qplayer = QPlayer
+
+
